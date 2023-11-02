@@ -11,10 +11,16 @@ class VerificationController extends Controller
         return view('user/verification');
     }
     public function verificationSave(Request $request, $userid){
-        $role_requests = RequestForRole::where('user_id',$userid)->first();
-        if($role_requests!=null){
+        $role_requests = RequestForRole::where('user_id', $userid)->where('approved', 'Очікування')->get();
+        if(!$role_requests->isEmpty()){
             return redirect()->route('welcome')->with('error', "Ваш запит на верифікацію вже отримано. Очікуйте результатів");
         }
+
+        $role_requests = RequestForRole::where('user_id', $userid)->where('approved', 'Відмовлено')->get();
+        if(!$role_requests->isEmpty()){
+            return redirect()->route('welcome')->with('error', "Ваш запит на верифікацію вже отримано. Очікуйте результатів");
+        }
+
         $request->validate([
             'verification_photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
