@@ -31,6 +31,9 @@
                                 @if(Auth::user()->role_id === 1)
                                 <li><a class="dropdown-item" href="{{ route('verification') }}">Верифікуватися як військовий</a></li>
                                @endif
+                               @if(Auth::user()->role_id===3)
+                               <li><a class="dropdown-item" href="{{ route('verification-requests') }}">Перегляд заяв на верифікацію</a></li>
+                               @endif
                                 <li><a class="dropdown-item" href="{{ route('logout') }}">Вихід з профілю</a></li>
                             @else
                                 <li><a class="dropdown-item" href="{{ route('loginView') }}">Авторизація</a></li>

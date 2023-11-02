@@ -7,7 +7,7 @@
             @csrf
             <h2 class="mb-4">Верифікація військових</h2>
             <div class="mb-3">
-                <label for="verification_photo" class="form-label">Завантажте фотографію ваших документів, які підтверджують вашу особу як військовозобов'язаного</label>
+                <label for="verification_photo" class="form-label">Завантажте фотографію ваших документів, які підтверджують вашу особу як військовозобов'язаного (формати: .png, .jpeg, .jpg)</label>
                 <input type="file" id="verification_photo" name="verification_photo" class="form-control">
             </div>
             <button type="submit" class="btn btn-primary">Надіслати на обробку</button>

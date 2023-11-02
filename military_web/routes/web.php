@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\VerificationController;
-
+use App\Http\Controllers\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,3 +27,4 @@ Route::get('/profile/{userid}', [AuthController::class, 'profile'])->name('profi
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/verification', [VerificationController::class, 'verificationView'])->name('verification');
 Route::post('/verification/{userid}', [VerificationController::class, 'verificationSave'])->name('verify');
+Route::get('/verification-requests', [AdminController::class, 'viewVerificationRequests'])->name('verification-requests');
