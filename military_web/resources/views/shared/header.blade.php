@@ -28,6 +28,9 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             @if(Auth::check())
                                 <li><a class="dropdown-item" href="{{ route('profile', Auth::user()->id) }}">Мій профіль</a></li>
+                                @if(Auth::user()->role_id === 1)
+                                <li><a class="dropdown-item" href="{{ route('verification') }}">Верифікуватися як військовий</a></li>
+                               @endif
                                 <li><a class="dropdown-item" href="{{ route('logout') }}">Вихід з профілю</a></li>
                             @else
                                 <li><a class="dropdown-item" href="{{ route('loginView') }}">Авторизація</a></li>

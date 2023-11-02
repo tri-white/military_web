@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\VerificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +25,4 @@ Route::get('/login', [AuthController::class, 'loginView'])->name('loginView');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/profile/{userid}', [AuthController::class, 'profile'])->name('profile');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/verification', [VerificationController::class, 'verificationView'])->name('verification');
