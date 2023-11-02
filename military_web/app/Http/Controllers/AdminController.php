@@ -9,7 +9,8 @@ class AdminController extends Controller
 {
     public function viewVerificationRequests()
     {
-        $verificationRequests = RequestForRole::all();
+        $verificationRequests = RequestForRole::orderBy('created_at', 'desc')->get();
         return view('manager/verification-requests', compact('verificationRequests'));
     }
+
 }

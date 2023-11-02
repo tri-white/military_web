@@ -1,4 +1,4 @@
-<footer class="bg-light text-center text-white mt-5">
+<footer class="bg-light text-center text-white mt-auto">
 <div class="container p-1">
           <section class="my-1">
             <!-- Посилання на соц.мережі -->
