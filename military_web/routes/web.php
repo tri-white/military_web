@@ -27,8 +27,11 @@ Route::get('/profile/{userid}', [AuthController::class, 'profile'])->name('profi
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/verification', [VerificationController::class, 'verificationView'])->name('verification');
 Route::post('/verification/{userid}', [VerificationController::class, 'verificationSave'])->name('verify');
+
 Route::get('/verification-requests', [AdminController::class, 'viewVerificationRequests'])->name('verification-requests');
+
 Route::get('/verification-request/{id}', [AdminController::class, 'viewVerification'])->name('view-verification');
 Route::post('/verification-request/{id}/approve', [AdminController::class, 'approveVerification'])->name('approve-verification');
 Route::post('/verification-request/{id}/disapprove', [AdminController::class, 'disapproveVerification'])->name('disapprove-verification');
 Route::post('/verification-request/{id}/waiting', [AdminController::class, 'verificationToWaiting'])->name('verification-to-waiting');
+Route::post('/verification-request/{id}/remove', [AdminController::class, 'removeVerification'])->name('remove-verification');

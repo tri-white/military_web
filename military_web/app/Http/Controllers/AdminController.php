@@ -51,5 +51,16 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'Заяву не знайдено.');
         }
     }
+    public function removeVerification(Request $request, $id){
+        $verificationRequest = RequestForRole::find($id);
+        
+        if ($verificationRequest) {
+            $verificationRequest->delete();
+            return redirect()->route('verification-requests')->with('success', 'Заяву було видалено.');
+        } else {
+            return redirect()->back()->with('error', 'Заяву не знайдено');
+        }
+    }
+    
     
 }
