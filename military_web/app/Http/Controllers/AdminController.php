@@ -40,5 +40,16 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'Заяву не знайдено.');
         }
     }
+    public function verificationToWaiting(Request $request, $id){
+        $verificationRequest = RequestForRole::find($id);
+        
+        if ($verificationRequest) {
+            $verificationRequest->approved = 'Очікування';
+            $verificationRequest->save();
+            return redirect()->back()->with('success', 'Заяву було перенесено в стан очікування.');
+        } else {
+            return redirect()->back()->with('error', 'Заяву не знайдено.');
+        }
+    }
     
 }

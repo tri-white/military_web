@@ -16,15 +16,27 @@
         @if ($request->approved === 'Очікування')
             <form method="post" action="{{ route('approve-verification', ['id' => $request->id]) }}">
                 @csrf
-                <button type="submit" class="btn btn-success">Підтвердити</button>
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-success">Підтвердити</button>
+                    <button type="button" class="btn btn-danger" data-toggle="collapse" data-target="#disapproveReason" aria-expanded="false" aria-controls="disapproveReason">
+                        Відхилити
+                    </button>
+                </div>
             </form>
 
-            <form method="post" action="{{ route('disapprove-verification', ['id' => $request->id]) }}">
+            <div class="collapse mt-2" id="disapproveReason">
+                <form method="post" action="{{ route('disapprove-verification', ['id' => $request->id]) }}">
+                    @csrf
+                    <div class="form-group">
+                        <input type="text" name="reason" placeholder="Reason for Disapproval" required>
+                    </div>
+                    <button type="submit" class="btn btn-danger">Відхилити</button>
+                </form>
+            </div>
+        @elseif ($request->approved === 'Підтверджено' || $request->approved === 'Відмовлено')
+            <form method="post" action="{{ route('verification-to-waiting', ['id' => $request->id]) }}">
                 @csrf
-                <div class="form-group">
-                    <input type="text" name="reason" placeholder="Reason for Disapproval" required>
-                </div>
-                <button type="submit" class="btn btn-danger">Відхилити</button>
+                <button type="submit" class="btn btn-warning">Змінити на "Очікування"</button>
             </form>
         @endif
     </div>

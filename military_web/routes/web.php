@@ -31,3 +31,4 @@ Route::get('/verification-requests', [AdminController::class, 'viewVerificationR
 Route::get('/verification-request/{id}', [AdminController::class, 'viewVerification'])->name('view-verification');
 Route::post('/verification-request/{id}/approve', [AdminController::class, 'approveVerification'])->name('approve-verification');
 Route::post('/verification-request/{id}/disapprove', [AdminController::class, 'disapproveVerification'])->name('disapprove-verification');
+Route::post('/verification-request/{id}/waiting', [AdminController::class, 'verificationToWaiting'])->name('verification-to-waiting');
