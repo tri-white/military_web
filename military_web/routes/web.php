@@ -26,3 +26,4 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/profile/{userid}', [AuthController::class, 'profile'])->name('profile');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/verification', [VerificationController::class, 'verificationView'])->name('verification');
+Route::post('/verification/{userid}', [VerificationController::class, 'verificationSave'])->name('verify');
