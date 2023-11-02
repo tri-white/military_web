@@ -29,3 +29,5 @@ Route::get('/verification', [VerificationController::class, 'verificationView'])
 Route::post('/verification/{userid}', [VerificationController::class, 'verificationSave'])->name('verify');
 Route::get('/verification-requests', [AdminController::class, 'viewVerificationRequests'])->name('verification-requests');
 Route::get('/verification-request/{id}', [AdminController::class, 'viewVerification'])->name('view-verification');
+Route::post('/verification-request/{id}/approve', [AdminController::class, 'approveVerification'])->name('approve-verification');
+Route::post('/verification-request/{id}/disapprove', [AdminController::class, 'disapproveVerification'])->name('disapprove-verification');

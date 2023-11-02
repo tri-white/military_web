@@ -32,11 +32,11 @@
                             $user = App\Models\User::where('id', $request->user_id)->first();
                             $approvedClass = '';
                             if ($request->approved === 'Очікування') {
-                                $approvedClass = 'text-secondary'; // Gray color
+                                $approvedClass = 'text-secondary';
                             } elseif ($request->approved === 'Відмовлено') {
-                                $approvedClass = 'text-danger'; // Red color
+                                $approvedClass = 'text-danger';
                             } elseif ($request->approved === 'Підтверджено') {
-                                $approvedClass = 'text-success'; // Green color
+                                $approvedClass = 'text-success';
                             }
                         @endphp
                         <td>{{ $user->email }}</td>

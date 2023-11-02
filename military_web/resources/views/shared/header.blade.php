@@ -10,12 +10,6 @@
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto fs-5">
-                    <li class="nav-item mx-lg-2 mx-md-1 mx-sm-0">
-                        <a class="nav-link" href="{{ url('/') }}">Блог</a>
-                    </li>
-                    <li class="nav-item mx-lg-2 mx-md-1 mx-sm-0">
-                        <a class="nav-link" href="{{ url('/about') }}">Про сайт</a>
-                    </li>
                     <li class="nav-item mx-lg-2 mx-md-1 mx-sm-0 dropdown">
                         <a class="nav-link dropdown-toggle pe-auto" id="navbarDropdown" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">

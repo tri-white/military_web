@@ -32,11 +32,12 @@ class VerificationController extends Controller
             'verification_photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
         $data = new RequestForRole();
-        $imagePath =  $request->file('verification_photo')->store('verification_documents');
+        $imagePath =  $request->file('verification_photo')->store('public/verification_documents');
         $data->user_id = $userid;
-        $data->ticket_photo =$imagePath;
+        $data->ticket_photo = str_replace('public/', '', $imagePath);
         $data->save();
         return redirect()->route('welcome')->with('success', "Запит на верифікацію отримано. Наш менеджер найближчим часом його перевірить та надішле повідомлення на пошту");
         
     }
+    
 }
