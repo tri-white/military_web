@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\RequestForRole;
+use App\Models\User;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\DisapprovalEmail; 
 
 class AdminController extends Controller
 {
@@ -30,11 +33,14 @@ class AdminController extends Controller
     
     public function disapproveVerification(Request $request, $id){
         $verificationRequest = RequestForRole::find($id);
-    
+
         if ($verificationRequest) {
             $verificationRequest->approved = 'Відмовлено';
             $verificationRequest->save();
-            // email: $request->input('reason')
+            $user = User::find($verificationRequest->user_id);
+
+            Mail::to($user->email)->send(new DisapprovalEmail($request->input('reason')));
+
             return redirect()->back()->with('success', 'Заяву було відхилено.');
         } else {
             return redirect()->back()->with('error', 'Заяву не знайдено.');
