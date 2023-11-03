@@ -7,19 +7,6 @@
             <div class="col-lg-6">
                 <h1 class="mb-4 text-center">Реєстрація</h1>
 
-                    @if ($errors->has('name'))
-                        <div class="alert alert-danger">{{ $errors->first('name') }}</div>
-                    @endif
-                    @if ($errors->has('email'))
-                        <div class="alert alert-danger">{{ $errors->first('email') }}</div>
-                    @endif
-                    @if ($errors->has('password'))
-                        <div class="alert alert-danger">{{ $errors->first('password') }}</div>
-                    @endif
-
-                    @if ($errors->has('password2'))
-                        <div class="alert alert-danger">{{ $errors->first('password2') }}</div>
-                    @endif
                 <form method="post" action="{{ route('registration') }}" autocomplete="off">
                     @csrf
                     <div class="mb-3">

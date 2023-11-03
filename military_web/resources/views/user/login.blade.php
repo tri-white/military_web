@@ -6,12 +6,6 @@
         <div class="row justify-content-center">
             <div class="col-lg-6">
                 <h1 class="mb-4 text-center">Авторизація</h1>
-                    @if ($errors->has('email'))
-                        <div class="alert alert-danger">{{ $errors->first('login') }}</div>
-                    @endif
-                    @if ($errors->has('password'))
-                        <div class="alert alert-danger">{{ $errors->first('password') }}</div>
-                    @endif
                 <form method="post" action="{{ route('login') }}" autocomplete="off">
                     @csrf
                     <div class="mb-3">
