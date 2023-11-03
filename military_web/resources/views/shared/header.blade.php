@@ -27,6 +27,7 @@
                                @endif
                                @if(Auth::user()->role_id === 2)
                                 <li><a class="dropdown-item" href="{{ route('form_post-ask') }}">Створити оголошення на пошук предметів</a></li>
+                                <li><a class="dropdown-item" href="{{ route('form_post-fundraising') }}">Створити оголошення на збір коштів</a></li>
                                @endif
                                @if(Auth::user()->role_id===3)
                                <li><a class="dropdown-item" href="{{ route('verification-requests') }}">Перегляд заяв на верифікацію</a></li>

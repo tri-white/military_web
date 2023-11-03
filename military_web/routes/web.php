@@ -43,3 +43,7 @@ Route::post('/verification-request/{id}/remove', [AdminController::class, 'remov
 // Post ask for equipment (soldier side)
 Route::get('/post-ask/form', [SoldierController::class, 'form_postAsk'])->name('form_post-ask');
 Route::post('/post-ask/create/{userid}', [SoldierController::class, 'create_postAsk'])->name('create_post-ask');
+
+// Post for collecting money (soldier side)
+Route::get('/post-fundraising/form', [SoldierController::class, 'form_postFundraising'])->name('form_post-fundraising');
+Route::post('/post-fundraising/create/{userid}', [SoldierController::class, 'create_postFundraising'])->name('create_post-fundraising');

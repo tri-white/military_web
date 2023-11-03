@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class PostMoney extends Model
 {
     use HasFactory;
+    protected $table = "post_money";
 }
