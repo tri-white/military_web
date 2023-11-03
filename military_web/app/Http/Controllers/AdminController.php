@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\RequestForRole;
 use App\Models\User;
-use Illuminate\Support\Facades\Mail;
 use App\Mail\DisapprovalEmail; 
+use Mail;
 
 class AdminController extends Controller
 {

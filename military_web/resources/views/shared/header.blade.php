@@ -1,7 +1,7 @@
 <header>
     <nav class="navbar navbar-expand-sm navbar-light bg-light border-bottom border-2 border-primary">
         <div class="container">
-            <a class="navbar-brand fs-3" href="{{ url('/') }}">Trunin Blog</a>
+            <a class="navbar-brand fs-3" href="{{ url('/') }}">Military Trade</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
