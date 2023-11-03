@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\RequestForRole;
 use App\Models\User;
 use App\Mail\DisapprovalEmail; 
+use App\Mail\ApprovalEmail;
 use Mail;
 
 class AdminController extends Controller
@@ -25,6 +26,11 @@ class AdminController extends Controller
         if ($verificationRequest) {
             $verificationRequest->approved = 'Підтверджено';
             $verificationRequest->save();
+
+            $user = User::find($verificationRequest->user_id);
+
+            Mail::to($user->email)->send(new ApprovalEmail());
+
             return redirect()->back()->with('success', 'Заяву було підтверджено.');
         } else {
             return redirect()->back()->with('error', 'Заяву не знайдено.');

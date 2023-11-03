@@ -9,18 +9,16 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class DisapprovalEmail extends Mailable
+class ApprovalEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-    public $reason;
-
-    public function __construct($reason)
+    public function __construct()
     {
-        $this->reason = $reason;
+        //
     }
 
     /**
@@ -29,7 +27,7 @@ class DisapprovalEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Верифікацію не пройдено [Military Trade]',
+            subject: 'Верифікацію пройдено [Military Trade]',
         );
     }
 
@@ -39,8 +37,7 @@ class DisapprovalEmail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mails/disapprove-verification',
-            with: ['reason' => $this->reason],
+            view: 'mails/approve-verification',
         );
     }
 
