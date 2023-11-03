@@ -28,8 +28,10 @@ class AdminController extends Controller
             $verificationRequest->save();
 
             $user = User::find($verificationRequest->user_id);
-
+            if($user->role_id==1)
+                $user->role_id = 2;
             Mail::to($user->email)->send(new ApprovalEmail());
+            $user->save();
 
             return redirect()->back()->with('success', 'Заяву було підтверджено.');
         } else {

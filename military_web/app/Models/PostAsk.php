@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class PostAsk extends Model
 {
     use HasFactory;
+    protected $table = "post_ask";
 }
