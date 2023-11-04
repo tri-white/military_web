@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SoldierController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,3 +48,9 @@ Route::post('/post-ask/create/{userid}', [SoldierController::class, 'create_post
 // Post for collecting money (soldier side)
 Route::get('/post-fundraising/form', [SoldierController::class, 'form_postFundraising'])->name('form_post-fundraising');
 Route::post('/post-fundraising/create/{userid}', [SoldierController::class, 'create_postFundraising'])->name('create_post-fundraising');
+
+// Post for bids (user side)
+Route::get('/post-bid/form', [UserController::class, 'form_postBid'])->name('form_post-bid');
+Route::post('/post-bid/create/{userid}', [UserController::class, 'create_postBid'])->name('create_post-bid');
+Route::post('/post-bid/createFree/{userid}', [UserController::class, 'create_postBidFree'])->name('create_post-bidFree');
+

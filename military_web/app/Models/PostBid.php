@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class PostBid extends Model
 {
     use HasFactory;
+    protected $table = "post_bid";
 }

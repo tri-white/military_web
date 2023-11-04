@@ -24,6 +24,7 @@
                                 <li><a class="dropdown-item" href="{{ route('profile', Auth::user()->id) }}">Мій профіль</a></li>
                                 @if(Auth::user()->role_id === 1)
                                 <li><a class="dropdown-item" href="{{ route('verification') }}">Верифікуватися як військовий</a></li>
+                                <li><a class="dropdown-item" href="{{ route('form_post-bid') }}">Створити лот</a></li>
                                @endif
                                @if(Auth::user()->role_id === 2)
                                 <li><a class="dropdown-item" href="{{ route('form_post-ask') }}">Створити оголошення на пошук предметів</a></li>
