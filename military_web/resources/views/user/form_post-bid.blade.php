@@ -35,12 +35,12 @@
 
                 <div class="form-group" id="currentBidGroup">
                     <label for="current_bid">Початкова ціна (грн):</label>
-                    <input type="number" class="form-control" id="current_bid" name="current_bid" step="0.01" required>
+                    <input type="number" class="form-control" id="current_bid" name="current_bid" step="0.01">
                 </div>
 
                 <div class="form-group" id="buyPriceGroup">
                     <label for="buy_price">Ціна завершення (грн):</label>
-                    <input type="number" class="form-control" id="buy_price" name="buy_price" step="0.01" required>
+                    <input type="number" class="form-control" id="buy_price" name="buy_price" step="0.01">
                 </div>
 
                 <div class="form-group">

@@ -59,8 +59,11 @@ class AdminController extends Controller
         
         if ($verificationRequest) {
             $verificationRequest->approved = 'Очікування';
+            $user = User::find($verificationRequest->user_id);
+            if($user->role_id==2)
+                $user->role_id = 1;
             $verificationRequest->save();
-            return redirect()->back()->with('success', 'Заяву було перенесено в стан очікування.');
+            return redirect()->back()->with('success', 'Заяву було перенесено в стан очікування, а користувача повернено на роль звичайного користувача');
         } else {
             return redirect()->back()->with('error', 'Заяву не знайдено.');
         }
