@@ -11,6 +11,21 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto fs-5">
                     <li class="nav-item mx-lg-2 mx-md-1 mx-sm-0 dropdown">
+                            <a href="{{ route('fundraising-posts') }}">
+                                Збори коштів
+                            </a>
+                    </li>
+                    <li class="nav-item mx-lg-2 mx-md-1 mx-sm-0 dropdown">
+                            <a>
+                                Лоти
+                            </a>
+                    </li>
+                    <li class="nav-item mx-lg-2 mx-md-1 mx-sm-0 dropdown">
+                            <a>
+                                Запити військових
+                            </a>
+                    </li>
+                    <li class="nav-item mx-lg-2 mx-md-1 mx-sm-0 dropdown">
                         <a class="nav-link dropdown-toggle pe-auto" id="navbarDropdown" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
                            @if(Auth::check())

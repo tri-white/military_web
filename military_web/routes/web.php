@@ -54,3 +54,7 @@ Route::get('/post-bid/form', [UserController::class, 'form_postBid'])->name('for
 Route::post('/post-bid/create/{userid}', [UserController::class, 'create_postBid'])->name('create_post-bid');
 Route::post('/post-bid/createFree/{userid}', [UserController::class, 'create_postBidFree'])->name('create_post-bidFree');
 
+// Fundraising posts
+Route::post('/fundraising', [FundraisingPostController::class, 'index'])->name('fundraising-posts');
+
+
