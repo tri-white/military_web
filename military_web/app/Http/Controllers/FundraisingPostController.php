@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\PostMoney;
 
 class FundraisingPostController extends Controller
 {
     public function index(){
-        return view('fundraising_posts');
+        $fundraisingPosts = PostMoney::all();
+        return view('fundraising_posts', compact('fundraisingPosts'));
+    }
+    public function showPost($postid){
+        return redirect()->back();
     }
 }
