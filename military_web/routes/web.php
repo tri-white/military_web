@@ -6,6 +6,7 @@ use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SoldierController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FundraisingPostController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -55,6 +56,6 @@ Route::post('/post-bid/create/{userid}', [UserController::class, 'create_postBid
 Route::post('/post-bid/createFree/{userid}', [UserController::class, 'create_postBidFree'])->name('create_post-bidFree');
 
 // Fundraising posts
-Route::post('/fundraising', [FundraisingPostController::class, 'index'])->name('fundraising-posts');
+Route::get('/fundraising', [FundraisingPostController::class, 'index'])->name('fundraising-posts');
 
 
