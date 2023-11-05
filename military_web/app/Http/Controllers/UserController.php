@@ -32,7 +32,7 @@ class UserController extends Controller
         $listing->user_id = $userid;
         
         if ($request->hasFile('photo')) {
-            $photoPath = $request->file('photo')->store('public/postAsk');
+            $photoPath = $request->file('photo')->store('public/postBid');
             $listing->photo = $photoPath;
         }
         $listing->expiration_datetime = $request->input('expiration_datetime');
@@ -57,7 +57,7 @@ class UserController extends Controller
         $listing->content = $request->input('content');
         $listing->user_id = $userid;
         if ($request->hasFile('photo')) {
-            $photoPath = $request->file('photo')->store('public/postAsk');
+            $photoPath = $request->file('photo')->store('public/postBid');
             $listing->photo = $photoPath;
         }
         $listing->expiration_datetime = $request->input('expiration_datetime');

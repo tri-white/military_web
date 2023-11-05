@@ -7,6 +7,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SoldierController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FundraisingPostController;
+use App\Http\Controllers\LotPostController;
+use App\Http\Controllers\AskPostController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -59,4 +61,14 @@ Route::post('/post-bid/createFree/{userid}', [UserController::class, 'create_pos
 Route::get('/fundraising', [FundraisingPostController::class, 'index'])->name('fundraising-posts');
 Route::get('/fundraising-post/{postid}', [FundraisingPostController::class, 'showPost'])->name('fundraising-post');
 Route::post('/fundraising-post/{postid}/donate', [FundraisingPostController::class, 'donate'])->name('fundraising-post-donate');
+
+// Lot posts
+Route::get('/lots', [LotPostController::class, 'index'])->name('lot-posts');
+Route::get('/lot-post/{postid}', [LotPostController::class, 'showPost'])->name('lot-post');
+Route::post('/lot-post/{postid}/place-bid', [LotPostController::class, 'bid'])->name('lot-post-bid');
+
+// Ask posts
+Route::get('/asks', [AskPostController::class, 'index'])->name('ask-posts');
+Route::get('/ask-post/{postid}', [AskPostController::class, 'showPost'])->name('ask-post');
+Route::post('/ask-post/{postid}/propose', [AskPostController::class, 'propose'])->name('ask-post-propose');
 

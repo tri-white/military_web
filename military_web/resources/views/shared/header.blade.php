@@ -15,13 +15,15 @@
                                 Збори коштів
                             </a>
                     </li>
+                    @if(Auth::user()->role_id === 2)
                     <li class="nav-item mx-lg-2 mx-md-1 mx-sm-0 dropdown">
-                            <a href="{{ route('fundraising-posts') }}" class="text-decoration-none link-dark">
+                            <a href="{{ route('lot-posts') }}" class="text-decoration-none link-dark">
                                 Лоти
                             </a>
                     </li>
+                    @endif
                     <li class="nav-item mx-lg-2 mx-md-1 mx-sm-0 dropdown">
-                            <a href="{{ route('fundraising-posts') }}" class="text-decoration-none link-dark">
+                            <a href="{{ route('ask-posts') }}" class="text-decoration-none link-dark">
                                 Запити військових
                             </a>
                     </li>
