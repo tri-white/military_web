@@ -57,6 +57,6 @@ Route::post('/post-bid/createFree/{userid}', [UserController::class, 'create_pos
 
 // Fundraising posts
 Route::get('/fundraising', [FundraisingPostController::class, 'index'])->name('fundraising-posts');
-Route::get('/fundraising/{postid}', [FundraisingPostController::class, 'showPost'])->name('fundraising-post');
-
+Route::get('/fundraising-post/{postid}', [FundraisingPostController::class, 'showPost'])->name('fundraising-post');
+Route::post('/fundraising-post/{postid}/donate', [FundraisingPostController::class, 'donate'])->name('fundraising-post-donate');
 
