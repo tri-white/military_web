@@ -11,17 +11,17 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto fs-5">
                     <li class="nav-item mx-lg-2 mx-md-1 mx-sm-0 dropdown">
-                            <a href="{{ route('fundraising-posts') }}">
+                            <a href="{{ route('fundraising-posts') }}" class="text-decoration-none link-dark">
                                 Збори коштів
                             </a>
                     </li>
                     <li class="nav-item mx-lg-2 mx-md-1 mx-sm-0 dropdown">
-                            <a>
+                            <a href="{{ route('fundraising-posts') }}" class="text-decoration-none link-dark">
                                 Лоти
                             </a>
                     </li>
                     <li class="nav-item mx-lg-2 mx-md-1 mx-sm-0 dropdown">
-                            <a>
+                            <a href="{{ route('fundraising-posts') }}" class="text-decoration-none link-dark">
                                 Запити військових
                             </a>
                     </li>

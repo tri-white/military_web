@@ -1,12 +1,14 @@
 @extends('shared/layout')
 
 @section('content')
+@push('css')
 <style>
     .text-justify {
         text-align: justify;
         text-justify: inter-word;
     }
 </style>
+@endpush
 
 <div class="container my-5">
     <div class="row">
@@ -41,7 +43,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="donationAmount">Введіть суму:</label>
-                            <input type="number" name="donationAmount" id="donationAmount" class="form-control">
+                            <input type="number" name="donationAmount" id="donationAmount" class="form-control" min="1">
                         </div>
                         <button type="submit" class="btn btn-primary mt-3">Сплатити</button>
                     </form>
