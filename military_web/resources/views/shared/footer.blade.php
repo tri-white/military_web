@@ -1,4 +1,4 @@
-<footer class="bg-light text-center text-white mt-auto">
+<footer class="text-center text-white mt-auto" style="background-color: #515647;">
 <div class="container p-1">
           <section class="my-1">
             <!-- Посилання на соц.мережі -->
