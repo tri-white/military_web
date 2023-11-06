@@ -16,15 +16,11 @@
                                 Збори коштів
                             </a>
                         </li>
-                        @if(Auth::check())
-                        @if(Auth::user()->role_id === 2)
                         <li class="nav-item mx-lg-2 mx-md-1 mx-sm-0 dropdown">
                             <a href="{{ route('lot-posts') }}" class="text-decoration-none text-white">
                                 Лоти
                             </a>
                         </li>
-                        @endif
-                        @endif
                         <li class="nav-item mx-lg-2 mx-md-1 mx-sm-0 dropdown">
                             <a href="{{ route('ask-posts') }}" class="text-decoration-none text-white">
                                 Запити військових
@@ -39,10 +35,10 @@
                                +
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                @if(Auth::user()->role_id === 1)
+                                @if(Auth::user()->role_id === 1 || Auth::user()->role_id===3)
                                 <li><a class="dropdown-item" href="{{ route('form_post-bid') }}">Створити лот</a></li>
                                 @endif
-                                @if(Auth::user()->role_id === 2)
+                                @if(Auth::user()->role_id === 2 || Auth::user()->role_id===3)
                                 <li><a class="dropdown-item" href="{{ route('form_post-ask') }}">Створити оголошення на пошук предметів</a></li>
                                 <li><a class="dropdown-item" href="{{ route('form_post-fundraising') }}">Створити оголошення на збір коштів</a></li>
                                 @endif

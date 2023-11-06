@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\VerificationController;
@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\FundraisingPostController;
 use App\Http\Controllers\LotPostController;
 use App\Http\Controllers\AskPostController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,9 +33,25 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/profile/{userid}', [AuthController::class, 'profile'])->name('profile');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
+// Email verification
+Route::get('/email/verify', function () {
+    return redirect()->route('welcome')->with('success','Підтвердіть реєстрацію за інструкціями які надійшли вам на пошту.');
+})->middleware('auth')->name('verification.notice');
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+ 
+    return redirect()->route('welcome')->with('success','Успішно верифіковано!');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+ 
+    return redirect()->back()->with('success', 'Надіслано лист верифікації!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+
 // Verification (user side)
-Route::get('/verification', [VerificationController::class, 'verificationView'])->name('verification');
-Route::post('/verification/{userid}', [VerificationController::class, 'verificationSave'])->name('verify');
+Route::get('/verification', [VerificationController::class, 'verificationView'])->name('verification')->middleware(['auth', 'verified']);;
+Route::post('/verification/{userid}', [VerificationController::class, 'verificationSave'])->name('verify')->middleware(['auth', 'verified']);;
 
 // Verification (admin side)
 Route::get('/verification-requests', [AdminController::class, 'viewVerificationRequests'])->name('verification-requests');
@@ -72,3 +89,20 @@ Route::get('/asks', [AskPostController::class, 'index'])->name('ask-posts');
 Route::get('/ask-post/{postid}', [AskPostController::class, 'showPost'])->name('ask-post');
 Route::post('/ask-post/{postid}/propose', [AskPostController::class, 'propose'])->name('ask-post-propose');
 
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/', function () {
+        // Uses first & second middleware...
+    });
+ 
+    Route::get('/user/profile', function () {
+        // Uses first & second middleware...
+    });
+    
+});
+
+
+Route::middleware(['auth', 'verified'])->group(function () {
+
+});
