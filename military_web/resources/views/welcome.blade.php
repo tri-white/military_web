@@ -2,32 +2,78 @@
 
 @push('css')
 <style>
-    main {
-        background-image: none; /* Replace with the URL of your background image */
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-position: center center;
-        height: 100vh; /* Make the content take up the full viewport height */
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    .center-header {
+        margin-top: 90px;
+        margin-bottom:90px;
     }
 
-    h1 {
-        color: #fff; /* Set the text color to white */
-        font-size: 36px; /* Adjust the font size as needed */
-        text-align: center;
+    .custom-card {
+        border-radius: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        width: 250px;
+        height: 275px; /* Increased height for more content */
+        text-align: justify;
+        background-color: #2B2C27;
+        color: white;
+    }
+
+    .card-text {
+        font-size: 16px;
+        text-align: justify;
+        word-wrap: break-word;
+        margin: auto;
+        line-height:1.75rem;
+    }
+
+    .card-img {
+        width: 100px; /* Set a fixed width for the icons */
+        height: 100px; /* Set a fixed height for the icons */
+        margin-bottom:16px;
     }
 </style>
 @endpush
 
 @section('content')
 <main>
-    <h1>Hi world</h1>
+    <h1 class="center-header text-center text-white">Ласкаво просимо!</h1>
+
+    <div class="cards-container container mt-5 d-flex justify-content-between align-items-center text-center">
+        <div class="row col-12 d-flex justify-content-between align-items-center text-center">
+            <div class="col-4">
+                <div class="card custom-card mx-auto">
+                    <a  href="{{ route('fundraising-posts') }}" class="link-dark text-decoration-none text-white">
+                    <div class="card-body text-center">
+                        <img src="{{ asset('icon1.png') }}" alt="Image 1" class="card-img">
+                        <p class="card-text">Допомагайте військовим збирати кошти на їх потреби, та переглядайте прогрес накопичення коштів</p>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card custom-card mx-auto">
+                    <div class="card-body text-center">
+                        <a  href="{{ route('lot-posts') }}" class="link-dark text-decoration-none text-white">
+
+                            <img src="{{ asset('icon2.png') }}" alt="Image 2" class="card-img">
+                            <p class="card-text">Переглядайте оголошення волонтерів, які готові віддати необхідні військовим речі</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card custom-card mx-auto">
+                    <div class="card-body text-center">
+                        <a  href="{{ route('ask-posts') }}" class="link-dark text-decoration-none text-white">
+                            <img src="{{ asset('icon3.png') }}" style="width:175px;" alt="Image 3" class="card-img">
+                            <p class="card-text">Переглядайте оголошення військових про їх потреби, та надсилайте їм свої пропозиції</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
 @endsection
 
 @push('js')
-    <!-- Your JavaScript scripts go here -->
-@endpush
+</script>

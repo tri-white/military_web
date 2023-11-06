@@ -31,10 +31,10 @@
                             </a>
                         </li>
                     </div>
-                    <div class="d-flex">
+                    <div class="d-flex text-white">
                         @if(Auth::check())
                         <li class="nav-item mx-lg-2 mx-md-1 mx-sm-0 dropdown">
-                            <a class="nav-link dropdown-toggle pe-auto" id="navbarDropdown" role="button"
+                            <a class="nav-link dropdown-toggle pe-auto text-white" id="navbarDropdown" role="button"
                                data-bs-toggle="dropdown" aria-expanded="false" style="padding: 0;">
                                +
                             </a>
@@ -50,7 +50,7 @@
                         </li>
                         @endif
                         <li class="nav-item mx-lg-2 mx-md-1 mx-sm-0 dropdown">
-                            <a class="nav-link dropdown-toggle pe-auto" id="navbarDropdown" role-  "button"
+                            <a class="nav-link dropdown-toggle pe-auto text-white" id="navbarDropdown" role="button"
                                data-bs-toggle="dropdown" aria-expanded="false" style="padding: 0;">
                                @if(Auth::check())
                                    {{ Auth::user()->email }}
