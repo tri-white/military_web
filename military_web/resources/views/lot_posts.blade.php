@@ -1,36 +1,79 @@
 @extends('shared/layout')
 
 @section('content')
-<div class="container my-5">
+<div class="container my-5 text-white">
     <h1 class="text-center mt-5">Список лотів</h1>
-    <div class="card-deck">
+    <div class="row text-whit my-5">
+     <div class="col-lg-12 text-center display-5">
+         Пошук
+     </div>
+     <div class="col-lg-8 col-md-10 col-sm-12 mx-auto align-items-center">
+         <div class="row d-flex justify-content-center">
+             <div class="col-lg-8 col-md-10 col-sm-12 text-center">
+                 <form method="post" action="">
+                     @csrf
+                     <div class="input-group">
+                         <input value="" name="search-input-key" type="search" class="px-3 form-control"
+                             placeholder="Пошук..." aria-label="Search" aria-describedby="search-addon" />
+                             <button type="submit" class="btn text-white" style="background-color:#B5C186">Знайти</button>
+                     </div>
+                     <div class="d-flex justify-content-between mb-2 mt-2">
+                         <div class="col-lg-6">
+                             <select id="product-category-filter" name="product-category-filter" class="form-select"
+                                 aria-label="Категорія" style="width:100%;">
+                                 <option value="all">Всі категорії</option>
+                                 @foreach($categories as $category)
+										<option value="{{ $category->id }}">{{ $category->name }}</option>
+									@endforeach
+                             </select>
 
-        @foreach($lotPosts as $postBid)
-        <div class="col-md-4">
-            <a href="{{ route('lot-post', ['postid' => $postBid->id]) }}" class="card-link" style="text-decoration: none; color: inherit;">
-                <div class="card mb-4">
-                    <img src="{{ $postBid->photo ? asset(str_replace('public/', 'storage/', $postBid->photo)) : asset('no-image.jpg') }}" class="card-img-top" alt="Listing Photo">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ $postBid->header }}</h5>
-                        <p class="card-text">{{ $postBid->content }}</p>
-                        @php 
-                        $category = App\Models\Category::where('id', $postBid->category_id)->first();
-                        @endphp 
-                        <p class="card-text">Категорія: {{ $category->name }}</p>
-                        <p class="card-text">Дата і час завершення: {{ $postBid->expiration_datetime }}</p>
+                         </div>
+                         <div class="col-lg-6">
+                             <select id="product-sort" name="product-sort" class="form-select" aria-label="Категорія"
+                                 style="width:100%">
+                                 <option value="time-desc">По часу який залишився (↓)</option>
+                                 <option value="time-asc">По часу який залишився (↑)</option>
+                                 <option value="bid-desc">По поточній ставці (↓)</option>
+                                 <option value="bid-asc">По поточній ставці (↑)</option>
+                                 <option value="header-desc">По заголовку (↓)</option>
+                                 <option value="header-asc">По заголовку (↑)</option>
+                                 <option value="price-desc">По ціні купівлі (↓)</option>
+                                 <option value="price-asc">По ціні купівлі (↑)</option>
+                                 <option value="date-desc">По даті додавання (↓)</option>
+                                 <option value="date-asc">По даті додавання (↑)</option>
+                             </select>
+                         </div>
+                     </div>
+             </div>
+             </form>
 
-                        @if ($postBid->current_bid > 0)
-                        <p class="card-text">Поточна ставка: ${{ $postBid->current_bid }}</p>
-                        <p class="card-text">Ціна для миттєвої купівлі: ${{ $postBid->buy_price }}</p>
-                        @else
-                        <p class="card-text text-success">Цей лот безкоштовний! [Волонтерство]</p>
-                        @endif
-                    </div>
-                </div>
-            </a>
-        </div>
-        @endforeach
+         </div>
+     </div>
+ </div>
+ <div class="row">
+ @if (!$currentPagePosts)
+<div class='mb-5 text-muted col-lg-12 text-center display-4'>
+    Не знайдено продуктів
+</div>
+@else
+<div class="card-deck text-dark">
 
-    </div>
+@foreach($currentPagePosts as $postBid)
+    @include('card_pages/lot-card')
+@endforeach
+
+</div>
+@endif
+<nav aria-label="Page navigation example" class="mt-5">
+    <ul class="pagination justify-content-center">
+        @for ($page = 1; $page <= $totalPages; $page++)
+            <li class="page-item{{ $page == $currentPage ? ' active' : '' }}">
+                <a class="page-link text-white" href="{{ route('lot-posts', ['page' => $page]) }}" style="background-color:#B5C186">{{ $page }}</a>
+            </li>
+        @endfor
+    </ul>
+</nav>
+ </div>
+ 
 </div>
 @endsection

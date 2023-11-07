@@ -23,16 +23,16 @@ Route::get('/login', [AuthController::class, 'loginView'])->name('loginView');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 // Fundraising posts
-Route::get('/fundraising', [FundraisingPostController::class, 'index'])->name('fundraising-posts');
+Route::get('/fundraising/page={page}', [FundraisingPostController::class, 'index'])->name('fundraising-posts');
 Route::get('/fundraising-post/{postid}', [FundraisingPostController::class, 'showPost'])->name('fundraising-post');
 
 
 // Lot posts
-Route::get('/lots', [LotPostController::class, 'index'])->name('lot-posts');
+Route::get('/lots/page={page}', [LotPostController::class, 'index'])->name('lot-posts');
 Route::get('/lot-post/{postid}', [LotPostController::class, 'showPost'])->name('lot-post');
 
 // Ask posts
-Route::get('/asks', [AskPostController::class, 'index'])->name('ask-posts');
+Route::get('/asks/page={page}', [AskPostController::class, 'index'])->name('ask-posts');
 Route::get('/ask-post/{postid}', [AskPostController::class, 'showPost'])->name('ask-post');
 
 

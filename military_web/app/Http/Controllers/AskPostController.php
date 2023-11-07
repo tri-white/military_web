@@ -5,11 +5,26 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\PostAsk;
 use App\Models\Proposition;
+use App\Models\Category;
 class AskPostController extends Controller
 {
-    public function index(){
+    public function index($page){
         $askPosts = PostAsk::all();
-        return view('ask_posts', compact('askPosts'));
+        $categories= Category::all();
+        $page = (int)$page;
+
+        
+        $postsPerPage = 5;
+        $startIndex = ($page - 1) * $postsPerPage;
+        $totalPages = ceil($askPosts->count() / $postsPerPage);
+        $currentPagePosts= $askPosts->slice($startIndex, $postsPerPage);
+
+        return view('ask_posts', [
+            'categories' => $categories,
+            'currentPage' => $page,
+            'currentPagePosts' => $currentPagePosts,
+            'totalPages' => $totalPages,
+        ]);
     }
     public function showPost($postid){
         $postAsk = PostAsk::find($postid);

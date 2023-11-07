@@ -4,12 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\PostMoney;
+use App\Models\Category;
 
 class FundraisingPostController extends Controller
 {
-    public function index(){
+    public function index($page){
+        $page = (int)$page;
+
         $fundraisingPosts = PostMoney::all();
-        return view('fundraising_posts', compact('fundraisingPosts'));
+        $categories= Category::all();
+
+        $postsPerPage = 5;
+        $startIndex = ($page - 1) * $postsPerPage;
+        $totalPages = ceil($fundraisingPosts->count() / $postsPerPage);
+        $currentPagePosts= $fundraisingPosts->slice($startIndex, $postsPerPage);
+
+        return view('fundraising_posts', [
+            'categories' => $categories,
+            'currentPage' => $page,
+            'currentPagePosts' => $currentPagePosts,
+            'totalPages' => $totalPages,
+        ]);
     }
     public function showPost($postid)
     {
