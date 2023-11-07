@@ -3,7 +3,7 @@
 @section('content')
 <main>
     <div class="profile-form container mt-5">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center text-white">
             <div class="col-lg-6">
                 <h1 class="mb-4 text-center">Реєстрація</h1>
 

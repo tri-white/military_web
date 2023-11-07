@@ -41,22 +41,27 @@ Route::middleware(['auth'])->group(function () {
     // user profile/logout
     Route::get('/profile/{userid}', [AuthController::class, 'profile'])->name('profile');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-    
-    // Email verification
+
+   // Email verification
     Route::get('/email/verify', function () {
-        return redirect()->route('welcome')->with('success','Підтвердіть реєстрацію за інструкціями які надійшли вам на пошту.');
-    })->middleware('auth')->name('verification.notice');
+        $successMessage = 'Підтвердіть реєстрацію за інструкціями які надійшли вам на пошту';
+        return redirect()->route('welcome')->with('success-email', $successMessage);
+    })->name('verification.notice');
+
+    
     Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
         $request->fulfill();
     
         return redirect()->route('welcome')->with('success','Успішно верифіковано!');
-    })->middleware(['auth', 'signed'])->name('verification.verify');
+    })->middleware(['signed'])->name('verification.verify');
+    
     Route::post('/email/verification-notification', function (Request $request) {
         $request->user()->sendEmailVerificationNotification();
     
         return redirect()->back()->with('success', 'Надіслано лист верифікації!');
-    })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+    })->middleware(['throttle:6,1'])->name('verification.send');
 
+    
     Route::post('/fundraising-post/{postid}/donate', [FundraisingPostController::class, 'donate'])->name('fundraising-post-donate');
 
 });

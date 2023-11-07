@@ -3,9 +3,9 @@
 @section('content')
 <main>
     <div class="profile-form container mt-5">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center text-white">
             <div class="col-lg-6">
-                <h1 class="mb-4 text-center">Авторизація</h1>
+                <h1 class="mb-4 text-center text-white">Авторизація</h1>
                 <form method="post" action="{{ route('login') }}" autocomplete="off">
                     @csrf
                     <div class="mb-3">
