@@ -1,7 +1,11 @@
-<div class="col-md-4">
-            <a href="{{ route('lot-post', ['postid' => $postBid->id]) }}" class="card-link" style="text-decoration: none; color: inherit;">
-                <div class="card mb-4">
-                    <img src="{{ $postBid->photo ? asset(str_replace('public/', 'storage/', $postBid->photo)) : asset('no-image.jpg') }}" class="card-img-top" alt="Listing Photo">
+<div class="col-9">
+    <a href="{{ route('lot-post', ['postid' => $postBid->id]) }}" class="card-link" style="text-decoration: none; color: inherit;">
+        <div class="card mb-4">
+            <div class="row g-0">
+                <div class="col-3">
+                    <img src="{{ $postBid->photo ? asset(str_replace('public/', 'storage/', $postBid->photo)) : asset('no-image.jpg') }}" class="card-img-top" alt="Listing Photo" style="height: 100%;">
+                </div>
+                <div class="col-9">
                     <div class="card-body">
                         <h5 class="card-title">{{ $postBid->header }}</h5>
                         <p class="card-text">{{ $postBid->content }}</p>
@@ -19,5 +23,7 @@
                         @endif
                     </div>
                 </div>
-            </a>
+            </div>
         </div>
+    </a>
+</div>

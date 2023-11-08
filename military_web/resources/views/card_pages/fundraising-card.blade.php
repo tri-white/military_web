@@ -1,5 +1,5 @@
-<a href="{{ route('fundraising-post', ['postid' => $post->id]) }}" class="card-link" style="text-decoration: none; color: inherit;">
-            <div class="col-8 mx-auto">
+<a href="{{ route('fundraising-post', ['postid' => $post->id]) }}" class="card-link " style="text-decoration: none; color: inherit;">
+            <div class="col-12 mx-auto ">
                 <div class="card mb-4" style="border: 1px solid #ccc; margin: 10px; border-radius: 10px; box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2); padding: 10px 20px; position: relative;">
                     <div class="card-body">
                         <h5 class="card-title d-flex justify-content-between" >

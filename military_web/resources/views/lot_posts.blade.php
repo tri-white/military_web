@@ -56,13 +56,15 @@
     Не знайдено продуктів
 </div>
 @else
-<div class="card-deck text-dark">
-
-@foreach($currentPagePosts as $postBid)
-    @include('card_pages/lot-card')
-@endforeach
-
+<div class="container text-dark">
+    @foreach($currentPagePosts as $postBid)
+        <div class="row justify-content-center">
+            @include('card_pages/lot-card')
+        </div>
+    @endforeach
 </div>
+
+
 @endif
 <nav aria-label="Page navigation example" class="mt-5">
     <ul class="pagination justify-content-center">

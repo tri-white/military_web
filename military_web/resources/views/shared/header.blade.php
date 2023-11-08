@@ -41,9 +41,7 @@
                                +
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                @if(Auth::user()->role_id === 1 || Auth::user()->role_id===3)
                                 <li><a class="dropdown-item" href="{{ route('form_post-bid') }}">Створити лот</a></li>
-                                @endif
                                 @if(Auth::user()->role_id === 2 || Auth::user()->role_id===3)
                                 <li><a class="dropdown-item" href="{{ route('form_post-ask') }}">Створити оголошення на пошук предметів</a></li>
                                 <li><a class="dropdown-item" href="{{ route('form_post-fundraising') }}">Створити оголошення на збір коштів</a></li>
