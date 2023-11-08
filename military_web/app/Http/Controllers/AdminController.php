@@ -8,7 +8,9 @@ use App\Models\User;
 use App\Mail\DisapprovalEmail; 
 use App\Mail\ApprovalEmail;
 use Mail;
-
+use DB;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
 class AdminController extends Controller
 {
     public function viewVerificationRequests()
@@ -16,10 +18,27 @@ class AdminController extends Controller
         $verificationRequests = RequestForRole::orderBy('created_at', 'desc')->get();
         return view('manager/verification-requests', compact('verificationRequests'));
     }
-    public function viewVerification($id){
-        $data = RequestForRole::where('id',$id)->first();
-        return view('manager/view-verification')->with('request',$data);
+    function getEnumValues($table, $field)
+    {
+        $type = DB::select("SHOW COLUMNS FROM $table WHERE Field = '$field'")[0]->Type;
+        preg_match('/^enum\((.*)\)$/', $type, $matches);
+        $values = array();
+        foreach(explode(',', $matches[1]) as $value){
+            $values[] = trim($value, "'");
+        }
+
+        return $values;
     }
+
+
+    public function viewVerification($id){
+        $request = RequestForRole::where('id', $id)->first();
+        $compositions = $this->getEnumValues('users', 'composition');
+        $profiles = $this->getEnumValues('users', 'profile');
+    
+        return view('manager/view-verification', compact('request', 'compositions', 'profiles'));
+    }
+    
     public function approveVerification(Request $request, $id){
         $verificationRequest = RequestForRole::find($id);
         
