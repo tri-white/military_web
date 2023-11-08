@@ -6,7 +6,7 @@
                   $page = 1;
                   $search = "null";
                   $cat = "all";
-                  $sort = "price-desc";
+                  $sort = "header-desc";
               @endphp
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

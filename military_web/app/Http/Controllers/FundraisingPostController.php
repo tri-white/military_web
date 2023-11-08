@@ -41,9 +41,9 @@ class FundraisingPostController extends Controller
         } elseif ($sort === 'date-asc') {
             $query->orderBy('created_at', 'asc');
         } elseif ($sort === 'header-desc') {
-            $query->orderBy('header', 'asc');
+            $query->orderBy('purpose', 'asc');
         } elseif ($sort === 'header-asc') {
-            $query->orderBy('header', 'desc');
+            $query->orderBy('purpose', 'desc');
         } elseif ($sort === 'goal-desc') {
             $query->orderBy('goal_amount', 'asc');
         } elseif ($sort === 'goal-asc') {
