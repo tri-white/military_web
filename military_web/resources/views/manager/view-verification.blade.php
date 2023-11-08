@@ -91,11 +91,11 @@
 
                         <!-- Військове звання -->
                         <label for="rankInput">Військове звання</label>
-                        <input type="text" class="form-control" id="rankInput" required>
+                        <input type="text" class="form-control" id="rankInput" name="rankInput" required>
 
                         <!-- Склад -->
                         <label for="selectComposition">Склад</label>
-                        <select class="form-select" id="selectComposition" required>
+                        <select class="form-select" id="selectComposition" name="selectComposition" required>
                             @php 
                                 $i = 1;
                             @endphp 
@@ -109,7 +109,7 @@
 
                         <!-- Профіль -->
                         <label for="selectProfile">Профіль</label>
-                        <select class="form-select" id="selectProfile" required>
+                        <select class="form-select" id="selectProfile" name="selectProfile" required>
                             @php 
                                 $i = 1;
                             @endphp 
@@ -127,6 +127,7 @@
                     <button type="submit" class="btn btn-success ms-3">Зберегти</button>
                 </div>
             </form>
+
 
 
         </div>
