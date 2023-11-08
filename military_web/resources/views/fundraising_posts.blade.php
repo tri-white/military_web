@@ -10,10 +10,10 @@
      <div class="col-lg-8 col-md-10 col-sm-12 mx-auto align-items-center">
          <div class="row d-flex justify-content-center">
              <div class="col-lg-8 col-md-10 col-sm-12 text-center">
-                 <form method="post" action="">
+                 <form method="post" action="{{ route('search-fundraisings') }}">
                      @csrf
                      <div class="input-group">
-                         <input value="" name="search-input-key" type="search" class="px-3 form-control"
+                         <input value="{{ ($searchInput!=='null' ? $searchInput : '') }}" name="search-input-key" type="search" class="px-3 form-control"
                              placeholder="Пошук..." aria-label="Search" aria-describedby="search-addon" />
                          <button type="submit" class="btn text-white" style="background-color:#B5C186">Знайти</button>
                      </div>
@@ -21,9 +21,9 @@
                          <div class="col-lg-6">
                              <select id="product-category-filter" name="product-category-filter" class="form-select"
                                  aria-label="Категорія" style="width:100%;">
-                                 <option value="all">Всі категорії</option>
+                                 <option value="all" {{ $selectedCategory == 'all' ? 'selected' : '' }}>Всі категорії</option>
                                  @foreach($categories as $category)
-										<option value="{{ $category->id }}">{{ $category->name }}</option>
+										<option value="{{ $category->id }}" {{ $selectedCategory == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
 									@endforeach
                              </select>
 
@@ -31,14 +31,14 @@
                          <div class="col-lg-6">
                              <select id="product-sort" name="product-sort" class="form-select" aria-label="Категорія"
                                  style="width:100%">
-                                 <option value="progress-desc">По прогресу % (↓)</option>
-                                 <option value="progress-asc">По прогресу % (↑)</option>
-                                 <option value="summ-desc">По сумі яка залишилася (грн) (↓)</option>
-                                 <option value="summ-asc">По сумі яка залишилася (грн) (↑)</option>
-                                 <option value="header-desc">По заголовку (↓)</option>
-                                 <option value="header-asc">По заголовку (↑)</option>
-                                 <option value="date-desc">По даті додавання (↓)</option>
-                                 <option value="date-asc">По даті додавання (↑)</option>
+                                 <option value="progress-desc" {{ $selectedSort == 'progress-desc' ? 'selected' : '' }}>По прогресу % (↓)</option>
+                                 <option value="progress-asc" {{ $selectedSort == 'progress-asc' ? 'selected' : '' }}>По прогресу % (↑)</option>
+                                 <option value="summ-desc" {{ $selectedSort == 'summ-desc' ? 'selected' : '' }}>По сумі яка залишилася (грн) (↓)</option>
+                                 <option value="summ-asc" {{ $selectedSort == 'summ-asc' ? 'selected' : '' }}>По сумі яка залишилася (грн) (↑)</option>
+                                 <option value="header-desc"  {{ $selectedSort == 'header-desc' ? 'selected' : '' }}>По заголовку (↓)</option>
+                                 <option value="header-asc" {{ $selectedSort == 'header-asc' ? 'selected' : '' }}>По заголовку (↑)</option>
+                                 <option value="date-desc" {{ $selectedSort == 'date-desc' ? 'selected' : '' }}>По даті додавання (↓)</option>
+                                 <option value="date-asc" {{ $selectedSort == 'date-asc' ? 'selected' : '' }}>По даті додавання (↑)</option>
                              </select>
                          </div>
                      </div>
@@ -65,7 +65,7 @@
     <ul class="pagination justify-content-center">
         @for ($page = 1; $page <= $totalPages; $page++)
             <li class="page-item{{ $page == $currentPage ? ' active' : '' }}">
-                <a class="page-link text-white" href="{{ route('fundraising-posts', ['page' => $page]) }}" style="background-color:#B5C186">{{ $page }}</a>
+                <a class="page-link text-white" href="{{ route('fundraising-posts', ['page' => $page, 'searchKey'=>$searchInput, 'category'=>$selectedCategory,'sort'=>$selectedSort]) }}" style="background-color:#B5C186">{{ $page }}</a>
             </li>
         @endfor
     </ul>

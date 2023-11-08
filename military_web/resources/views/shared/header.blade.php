@@ -3,8 +3,11 @@
         <div class="container">
             <a class="navbar-brand fs-3 text-white" href="{{ url('/') }}">Military Trade</a>
             @php 
-                            $page = 1;
-                        @endphp
+                  $page = 1;
+                  $search = "null";
+                  $cat = "all";
+                  $sort = "price-desc";
+              @endphp
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -15,17 +18,17 @@
                     <div class="d-flex ms-5">
                         <li class="nav-item mx-lg-2 mx-md-1 mx-sm-0 dropdown">
                        
-                        <a href="{{ route('fundraising-posts', $page) }}" class="text-decoration-none text-white">
+                        <a href="{{ route('fundraising-posts', ['page' => $page, 'searchKey'=>$search, 'category'=>$cat,'sort'=>$sort]) }}" class="text-decoration-none text-white">
                                 Збори коштів
                             </a>
                         </li>
                         <li class="nav-item mx-lg-2 mx-md-1 mx-sm-0 dropdown">
-                            <a href="{{ route('lot-posts', $page) }}" class="text-decoration-none text-white">
+                            <a href="{{ route('lot-posts', ['page' => $page, 'searchKey'=>$search, 'category'=>$cat,'sort'=>$sort]) }}" class="text-decoration-none text-white">
                                 Лоти
                             </a>
                         </li>
                         <li class="nav-item mx-lg-2 mx-md-1 mx-sm-0 dropdown">
-                            <a href="{{ route('ask-posts', $page) }}" class="text-decoration-none text-white">
+                            <a href="{{ route('ask-posts', ['page' => $page, 'searchKey'=>$search, 'category'=>$cat,'sort'=>$sort]) }}" class="text-decoration-none text-white">
                                 Запити військових
                             </a>
                         </li>

@@ -35,9 +35,12 @@
 
 @section('content')
 <main>
-@php 
-                            $page = 1;
-                        @endphp
+                @php 
+                  $page = 1;
+                  $search = "null";
+                  $cat = "all";
+                  $sort = "price-desc";
+              @endphp
     <h1 class="center-header text-center text-white">Ласкаво просимо!</h1>
 
     <div class="cards-container container mt-5 d-flex justify-content-between align-items-center text-center">
@@ -45,7 +48,7 @@
             <div class="col-4">
                 <div class="card custom-card mx-auto">
 
-                    <a  href="{{ route('fundraising-posts', $page) }}" class="link-dark text-decoration-none text-white">
+                    <a  href="{{ route('fundraising-posts', ['page' => $page, 'searchKey'=>$search, 'category'=>$cat,'sort'=>$sort]) }}" class="link-dark text-decoration-none text-white">
                     <div class="card-body text-center">
                         <img src="{{ asset('icon1.png') }}" alt="Image 1" class="card-img">
                         <p class="card-text">Допомагайте військовим збирати кошти на їх потреби, та переглядайте прогрес накопичення коштів</p>
@@ -56,7 +59,7 @@
             <div class="col-4">
                 <div class="card custom-card mx-auto">
                     <div class="card-body text-center">
-                        <a  href="{{ route('lot-posts', $page) }}" class="link-dark text-decoration-none text-white">
+                        <a  href="{{ route('lot-posts', ['page' => $page, 'searchKey'=>$search, 'category'=>$cat,'sort'=>$sort]) }}" class="link-dark text-decoration-none text-white">
 
                             <img src="{{ asset('icon2.png') }}" alt="Image 2" class="card-img">
                             <p class="card-text">Переглядайте оголошення волонтерів, які готові віддати необхідні військовим речі</p>
@@ -67,7 +70,7 @@
             <div class="col-4">
                 <div class="card custom-card mx-auto">
                     <div class="card-body text-center">
-                        <a  href="{{ route('ask-posts', $page) }}" class="link-dark text-decoration-none text-white">
+                        <a  href="{{ route('ask-posts', ['page' => $page, 'searchKey'=>$search, 'category'=>$cat,'sort'=>$sort]) }}" class="link-dark text-decoration-none text-white">
                             <img src="{{ asset('icon3.png') }}" style="width:175px;" alt="Image 3" class="card-img">
                             <p class="card-text">Переглядайте оголошення військових про їх потреби, та надсилайте їм свої пропозиції</p>
                         </a>

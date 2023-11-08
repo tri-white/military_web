@@ -8,11 +8,35 @@ use App\Models\Proposition;
 use App\Models\Category;
 class AskPostController extends Controller
 {
-    public function index($page){
-        $askPosts = PostAsk::all();
+    public function index($page,$searchKey, $category, $sort){
         $categories= Category::all();
         $page = (int)$page;
+        $query = PostAsk::query();
 
+        if ($searchKey !== "null") {
+            $query->where('name', 'like', '%' . $searchKey . '%');
+        }
+
+        if ($category !== 'all') {
+            $query->where('category_id', $category);
+        }
+        $query->withCount('propositions');
+
+        if ($sort === 'propositions-desc') {
+            $query->orderBy('propositions_count', 'desc');
+        } elseif ($sort === 'propositions-asc') {
+            $query->orderBy('propositions_count', 'asc');
+        } elseif ($sort === 'date-desc') {
+            $query->orderBy('created_at', 'desc');
+        } elseif ($sort === 'date-asc') {
+            $query->orderBy('created_at', 'asc');
+        } elseif ($sort === 'header-desc') {
+            $query->orderBy('header', 'asc');
+        } elseif ($sort === 'header-asc') {
+            $query->orderBy('header', 'desc');
+        }
+
+        $askPosts= $query->get();
         
         $postsPerPage = 5;
         $startIndex = ($page - 1) * $postsPerPage;
@@ -24,6 +48,9 @@ class AskPostController extends Controller
             'currentPage' => $page,
             'currentPagePosts' => $currentPagePosts,
             'totalPages' => $totalPages,
+            'searchInput' => $searchKey,
+            'selectedCategory' => $category,
+            'selectedSort' => $sort,
         ]);
     }
     public function showPost($postid){
@@ -63,5 +90,22 @@ class AskPostController extends Controller
         $proposition->save();
 
         return redirect()->route('ask-post', ['postid' => $postid])->with('success', 'Proposition submitted successfully');
+    }
+    public function search(Request $request)
+    {
+        $searchKey = $request->input('search-input-key');
+        $category = $request->input('product-category-filter');
+        $sort = $request->input('product-sort');
+
+        if ($searchKey === "" || $searchKey === null) {
+            $searchKey = "null";
+        }
+
+        return redirect()->action([AskPostController::class, 'index'], [
+            'page' => 1,  
+            'searchKey' => $searchKey,
+            'category' => $category,
+            'sort' => $sort,
+        ]);
     }
 }

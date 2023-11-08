@@ -9,4 +9,8 @@ class PostAsk extends Model
 {
     use HasFactory;
     protected $table = "post_ask";
+    public function propositions()
+    {
+        return $this->hasMany(Proposition::class, 'post_ask_id');
+    }
 }
