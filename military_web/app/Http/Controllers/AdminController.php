@@ -41,22 +41,28 @@ class AdminController extends Controller
     
     public function approveVerification(Request $request, $id){
         $verificationRequest = RequestForRole::find($id);
-        
+    
         if ($verificationRequest) {
             $verificationRequest->approved = 'Підтверджено';
             $verificationRequest->save();
-
+    
             $user = User::find($verificationRequest->user_id);
-            if($user->role_id==1)
+            if($user->role_id == 1)
                 $user->role_id = 2;
-            Mail::to($user->email)->send(new ApprovalEmail());
+    
+            $user->military_rank = $request->input('rankInput');
+            $user->composition = $request->input('selectComposition');
+            $user->profile = $request->input('selectProfile');
+    
             $user->save();
-
+            Mail::to($user->email)->send(new ApprovalEmail());
+    
             return redirect()->back()->with('success', 'Заяву було підтверджено.');
         } else {
             return redirect()->back()->with('error', 'Заяву не знайдено.');
         }
     }
+    
     
     public function disapproveVerification(Request $request, $id){
         $verificationRequest = RequestForRole::find($id);

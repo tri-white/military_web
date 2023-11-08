@@ -1,7 +1,7 @@
 @extends('shared/layout')
 
 @section('content')
-<div class="container mt-5">
+<div class="container mt-5 text-white border-white">
     <h2>Верифікація військових</h2>
 
     @if (session('success'))
@@ -16,8 +16,8 @@
         </div>
     @endif
 
-    <div class="table-responsive">
-        <table class="table table-bordered">
+    <div class="table-responsive text-white border-white">
+        <table class="table table-bordered text-white border-white">
             <thead>
                 <tr>
                     <th>Електронна скринька</th>
@@ -27,21 +27,13 @@
             </thead>
             <tbody>
                 @foreach($verificationRequests as $request)
-                    <tr onclick="window.location='{{ route('view-verification', ['id' => $request->id]) }}';" style="cursor: pointer;">
+                    <tr onclick="window.location='{{ route('view-verification', ['id' => $request->id]) }}';" style="cursor: pointer;" class="@if($request->approved === 'Очікування') bg-secondary @elseif($request->approved === 'Відмовлено') bg-danger @elseif($request->approved === 'Підтверджено') bg-success @endif">
                         @php
                             $user = App\Models\User::where('id', $request->user_id)->first();
-                            $approvedClass = '';
-                            if ($request->approved === 'Очікування') {
-                                $approvedClass = 'text-secondary';
-                            } elseif ($request->approved === 'Відмовлено') {
-                                $approvedClass = 'text-danger';
-                            } elseif ($request->approved === 'Підтверджено') {
-                                $approvedClass = 'text-success';
-                            }
                         @endphp
                         <td>{{ $user->email }}</td>
                         <td>{{ $request->created_at }}</td>
-                        <td class="{{ $approvedClass }}">{{ $request->approved }}</td>
+                        <td>{{ $request->approved }}</td>
                     </tr>
                 @endforeach
             </tbody>
