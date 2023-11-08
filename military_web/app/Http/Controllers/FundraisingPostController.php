@@ -15,7 +15,7 @@ class FundraisingPostController extends Controller
         $query = PostMoney::query();
 
         if ($searchKey !== "null") {
-            $query->where('name', 'like', '%' . $searchKey . '%');
+            $query->where('purpose', 'like', '%' . $searchKey . '%');
         }
 
         if ($category !== 'all') {
@@ -25,12 +25,16 @@ class FundraisingPostController extends Controller
    
 
         if ($sort === 'progress-desc') {
-            //$query->orderBy('price', 'desc');
+            $query->orderByRaw('(current_amount / goal_amount) * 100 DESC');
         } elseif ($sort === 'progress-asc') {
-            //$query->orderBy('price', 'asc');
+            $query->orderByRaw('(current_amount / goal_amount) * 100 ASC');
         } elseif ($sort === 'summ-asc') {
-            $query->orderBy('current_amount', 'asc');
+            $query->orderByRaw('(goal_amount - current_amount) ASC');
         } elseif ($sort === 'summ-desc') {
+            $query->orderByRaw('(goal_amount - current_amount) DESC');
+        } elseif ($sort === 'collected-asc') {
+            $query->orderBy('current_amount', 'asc');
+        } elseif ($sort === 'collected-desc') {
             $query->orderBy('current_amount', 'desc');
         } elseif ($sort === 'date-desc') {
             $query->orderBy('created_at', 'desc');
@@ -45,6 +49,7 @@ class FundraisingPostController extends Controller
         } elseif ($sort === 'goal-asc') {
             $query->orderBy('goal_amount', 'desc');
         }
+        
 
         $fundraisingPosts = $query->get();
 

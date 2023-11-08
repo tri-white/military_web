@@ -37,7 +37,6 @@
                                  <option value="bid-asc" {{ $selectedSort == 'bid-asc' ? 'selected' : '' }}>По поточній ставці (↑)</option>
                                  <option value="price-desc" {{ $selectedSort == 'price-desc' ? 'selected' : '' }}>По ціні купівлі (↓)</option>
                                  <option value="price-asc" {{ $selectedSort == 'price-asc' ? 'selected' : '' }}>По ціні купівлі (↑)</option>
-
                                  <option value="header-desc"  {{ $selectedSort == 'header-desc' ? 'selected' : '' }}>По заголовку (↓)</option>
                                  <option value="header-asc" {{ $selectedSort == 'header-asc' ? 'selected' : '' }}>По заголовку (↑)</option>
                                  <option value="date-desc" {{ $selectedSort == 'date-desc' ? 'selected' : '' }}>По даті додавання (↓)</option>

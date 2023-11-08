@@ -16,7 +16,7 @@ class LotPostController extends Controller
         $query = PostBid::query();
 
         if ($searchKey !== "null") {
-            $query->where('name', 'like', '%' . $searchKey . '%');
+            $query->where('header', 'like', '%' . $searchKey . '%');
         }
 
         if ($category !== 'all') {
