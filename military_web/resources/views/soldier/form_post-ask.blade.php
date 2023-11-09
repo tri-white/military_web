@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8 text-white">
-            <h2 class="text-center mt-4 mb-4">Створення оголошення</h2>
+            <h2 class="text-center mt-5 mb-4">Створення оголошення</h2>
             <form action="{{ route('create_post-ask', Auth::user()->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
@@ -34,8 +34,9 @@
                         @endforeach
                     </select>
                 </div>
-
-                <button type="submit" class="btn btn-primary btn-block mt-4">Створити оголошення</button>
+                <div class="div d-flex justify-content-center">
+                <button type="submit" class="btn text-white px-5 btn-block mt-4" style="background-color: #2B2C27;">Створити оголошення</button>
+</div>
             </form>
         </div>
     </div>
