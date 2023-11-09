@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-8 text-white">
             <h2 class="text-center mt-4 mb-4">Створення лоту</h2>
             <form action="{{ route('create_post-bid', Auth::user()->id) }}" method="POST" enctype="multipart/form-data" id="listingForm">
                 @csrf
@@ -23,7 +23,7 @@
                     <input type="file" class="form-control-file" id="photo" name="photo" accept=".jpg, .jpeg, .png">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group my-3">
                     <label for="expiration_datetime">Дата та час закінчення торгів:</label>
                     <input type="datetime-local" class="form-control" id="expiration_datetime" name="expiration_datetime" required>
                 </div>
@@ -43,7 +43,7 @@
                     <input type="number" class="form-control" id="buy_price" name="buy_price" step="0.01">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group mt-3">
                     <label for="category_id">Категорія:</label>
                     <select class="form-control" id="category_id" name="category_id">
                         @php 
