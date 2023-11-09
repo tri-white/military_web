@@ -55,7 +55,10 @@
     <div class="card-deck text-dark">
 
 @foreach($currentPagePosts as $postAsk)
+<div class="row justify-content-center">
 @include('card_pages/ask-card')
+        </div>
+
 @endforeach
 
 </div>

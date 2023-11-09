@@ -72,9 +72,9 @@ class AskPostController extends Controller
         // Validate the request data
         $request->validate([
             'price' => 'required|numeric|min:0',
-            'photo' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
+           
             'message' => 'required|string',
-            'post_ask_id' => 'required|exists:post_asks,id',
+            'post_ask_id' => 'required|exists:post_ask,id',
             'user_id' => 'required|exists:users,id',
         ]);
 
