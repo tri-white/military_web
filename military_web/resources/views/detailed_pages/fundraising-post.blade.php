@@ -19,7 +19,7 @@
                     <p class="card-text">Вже зібрано: {{ $fundraisingPost->current_amount }} / {{ $fundraisingPost->goal_amount }} грн.</p>
 
                     <div class="progress my-5">
-                        <div class="progress-bar" role="progressbar" style="width: {{ ($fundraisingPost->current_amount / $fundraisingPost->goal_amount) * 100 }}%;">
+                        <div class="progress-bar" role="progressbar" style="width: {{ ($fundraisingPost->current_amount / $fundraisingPost->goal_amount) * 100 }}%; background-color: #B5C186;">
                             {{ number_format(($fundraisingPost->current_amount / $fundraisingPost->goal_amount) * 100, 2) }}%
                         </div>
                     </div>
@@ -45,7 +45,7 @@
                             <label for="donationAmount">Введіть суму:</label>
                             <input type="number" name="donationAmount" id="donationAmount" class="form-control" min="1">
                         </div>
-                        <button type="submit" class="btn btn-primary mt-3">Сплатити</button>
+                        <button type="submit" class="btn text-white mt-3" style="background-color: #B5C186;">Сплатити</button>
                     </form>
                 </div>
             </div>

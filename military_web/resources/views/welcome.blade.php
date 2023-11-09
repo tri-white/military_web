@@ -39,7 +39,7 @@
                   $page = 1;
                   $search = "null";
                   $cat = "all";
-                  $sort = "price-desc";
+                  $sort = "date-desc";
               @endphp
     <h1 class="center-header text-center text-white">Ласкаво просимо!</h1>
 
