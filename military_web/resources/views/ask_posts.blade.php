@@ -64,7 +64,7 @@
     <ul class="pagination justify-content-center">
         @for ($page = 1; $page <= $totalPages; $page++)
             <li class="page-item{{ $page == $currentPage ? ' active' : '' }}">
-                <a class="page-link text-white" href="{{ route('ask-posts', ['page' => $page, 'searchKey'=>$searchInput, 'category'=>$selectedCategory,'sort'=>$selectedSort]) }}" style="background-color:#B5C186">{{ $page }}</a>
+                <a class="page-link" href="{{ route('ask-posts', ['page' => $page, 'searchKey'=>$searchInput, 'category'=>$selectedCategory,'sort'=>$selectedSort]) }}">{{ $page }}</a>
             </li>
         @endfor
     </ul>

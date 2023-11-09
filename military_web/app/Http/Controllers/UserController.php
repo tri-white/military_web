@@ -20,12 +20,8 @@ class UserController extends Controller
             'photo' => 'image|mimes:jpg,jpeg,png|max:2048',
             'expiration_datetime' => 'required|date_format:Y-m-d\TH:i|after:now',
             'current_bid' => 'required|numeric|min:0',
-            'buy_price' => 'required|numeric|min:0',
             'category_id' => 'required|exists:category,id',
         ]);
-        if($request->input('current_bid') > $request->input('buy_price')){
-            return redirect()->back()->with('error','Початкова ціна не може бути більшою за ціну завершення торгів');
-        }
         $listing = new PostBid();
         $listing->header = $request->input('header');
         $listing->content = $request->input('content');
@@ -37,7 +33,6 @@ class UserController extends Controller
         }
         $listing->expiration_datetime = $request->input('expiration_datetime');
         $listing->current_bid = $request->input('current_bid');
-        $listing->buy_price = $request->input('buy_price');
         $listing->category_id = $request->input('category_id');
         $listing->save();
 

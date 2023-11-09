@@ -38,11 +38,6 @@
                     <input type="number" class="form-control" id="current_bid" name="current_bid" step="0.01">
                 </div>
 
-                <div class="form-group" id="buyPriceGroup">
-                    <label for="buy_price">Ціна завершення (грн):</label>
-                    <input type="number" class="form-control" id="buy_price" name="buy_price" step="0.01">
-                </div>
-
                 <div class="form-group mt-3">
                     <label for="category_id">Категорія:</label>
                     <select class="form-control" id="category_id" name="category_id">

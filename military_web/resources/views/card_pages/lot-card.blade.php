@@ -19,26 +19,30 @@
                                 {{ $category->name }}
                             </span>
                         </h5>
-                        <div class="my-auto">
-                        @if ($postBid->current_bid > 0)
-                        <p class="card-text">Поточна ставка: ${{ $postBid->current_bid }}</p>
-                        <p class="card-text">Ціна для купівлі: ${{ $postBid->buy_price }}</p>
-                        @else
-                        <p class="card-text text-success">Цей лот безкоштовний! [Волонтерство]</p>
-                        @endif
+                        <div class="col-12">
+                            <p class="card-text"  style="overflow: hidden; text-overflow: ellipsis;"> {{ $postBid->content }} </p>
+
                         </div>
-                        
-                        <p class="" style="position:absolute; bottom:0px;">
-                            До завершення:  
-                            {{ \Carbon\Carbon::parse($postBid->expiration_datetime)->subHours(2)->diffForHumans(null, true) }}
-                        </p>
-
-
-
-                        <p class="text-end" style="position: absolute; bottom: 0px; right:25px; font-size:16px; color: gray;">
-                            {{ $postBid->created_at->format('d/m/Y') }}
-                        </p>
                     </div>
+                    <div class="out-of-card-body d-flex justify-content-center mt-3">
+                            <div id="middle" class="row">
+                                @if ($postBid->current_bid > 0)
+                                <p class="">Поточна ставка: ${{ $postBid->current_bid }}</p>
+                                @else
+                                <p class="card-text text-success">Цей лот безкоштовний! [Волонтерство]</p>
+                                @endif
+                            </div>
+                    </div>
+                    <p class="" style="position:absolute; bottom:0px; left:215px;">
+                        До завершення:  
+                        {{ \Carbon\Carbon::parse($postBid->expiration_datetime)->subHours(2)->diffForHumans(null, true) }}
+                    </p>
+
+
+
+                    <p class="text-end" style="position: absolute; bottom: 0px; right:25px; font-size:16px; color: gray;">
+                        {{ $postBid->created_at->format('d/m/Y') }}
+                    </p>
                 </div>
             </div>
         </div>
