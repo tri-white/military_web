@@ -9,7 +9,7 @@
                     <img src="{{ $postBid->photo ? asset(str_replace('public/', 'storage/', $postBid->photo)) : asset('no-image.jpg') }}" class="card-img-top" alt="Listing Photo" style="height: 100%;">
                 </div>
                 <div class="col-9">
-                    <div class="card-body">
+                    <div class="card-body" style="height:82%;">
                         <h5 class="mx-0 px-0 card-title d-flex justify-content-between">
                             <span class="pe-5" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width:90%;">
                                 {{ $postBid->header }}
@@ -20,29 +20,36 @@
                             </span>
                         </h5>
                         <div class="col-12">
-                            <p class="card-text"  style="overflow: hidden; text-overflow: ellipsis;"> {{ $postBid->content }} </p>
+                            <p class="card-text" style="display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; max-height: 100%;">{{ $postBid->content }}</p>
+                        </div>
+
+
+                    </div>
+                    <div class="row ms-3">
+                        <div class="col-4">
+                            <p class="text-start">
+                                До завершення:
+                                {{ \Carbon\Carbon::parse($postBid->expiration_datetime)->subHours(2)->diffForHumans(null, true) }}
+                            </p>
 
                         </div>
+                        <div class="col-5 text-center">
+                                    @if ($postBid->current_bid > 0)
+                                    <p class="">Поточна ставка: ${{ $postBid->current_bid }}</p>
+                                    @else
+                                    <p class="card-text text-success">Цей лот безкоштовний!</p>
+                                    @endif
+                        </div>
+                        <div class="col-3">
+                            <p class="text-end">
+                                {{ $postBid->created_at->format('d/m/Y') }}
+                            </p>
+                        </div>
                     </div>
-                    <div class="out-of-card-body d-flex justify-content-center mt-3">
-                            <div id="middle" class="row">
-                                @if ($postBid->current_bid > 0)
-                                <p class="">Поточна ставка: ${{ $postBid->current_bid }}</p>
-                                @else
-                                <p class="card-text text-success">Цей лот безкоштовний! [Волонтерство]</p>
-                                @endif
-                            </div>
-                    </div>
-                    <p class="" style="position:absolute; bottom:0px; left:215px;">
-                        До завершення:  
-                        {{ \Carbon\Carbon::parse($postBid->expiration_datetime)->subHours(2)->diffForHumans(null, true) }}
-                    </p>
+                    
 
 
-
-                    <p class="text-end" style="position: absolute; bottom: 0px; right:25px; font-size:16px; color: gray;">
-                        {{ $postBid->created_at->format('d/m/Y') }}
-                    </p>
+                    
                 </div>
             </div>
         </div>
