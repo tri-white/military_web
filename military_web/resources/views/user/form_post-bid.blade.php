@@ -62,17 +62,14 @@
 <script>
     const volunteerCheckbox = document.getElementById('volunteer');
     const currentBidGroup = document.getElementById('currentBidGroup');
-    const buyPriceGroup = document.getElementById('buyPriceGroup');
     const listingForm = document.getElementById('listingForm');
 
     volunteerCheckbox.addEventListener('change', function () {
         if (this.checked) {
             currentBidGroup.style.display = 'none';
-            buyPriceGroup.style.display = 'none';
             listingForm.action = "{{ route('create_post-bidFree', Auth::user()->id) }}";
         } else {
             currentBidGroup.style.display = 'block';
-            buyPriceGroup.style.display = 'block';
             listingForm.action = "{{ route('create_post-bid', Auth::user()->id) }}";
         }
     });
