@@ -1,6 +1,5 @@
 @extends('shared/layout')
 
-
 @section('content')
 
 <div class="container">
@@ -12,17 +11,17 @@
 
                 <div class="form-group mb-3">
                     <label for="purpose">Заголовок для оголошення про збір коштів:</label>
-                    <input type="text" class="form-control" id="purpose" name="purpose" required>
+                    <input type="text" class="form-control" id="purpose" name="purpose" value="{{ old('purpose') }}" required>
                 </div>
 
                 <div class="form-group">
                     <label for="goal_amount">Сума, яку необхідно зібрати (грн):</label>
-                    <input type="number" class="form-control" id="goal_amount" name="goal_amount" required>
+                    <input type="number" class="form-control" id="goal_amount" name="goal_amount" value="{{ old('goal_amount') }}" required>
                 </div>
 
                 <div class="form-group">
                     <label for="current_amount">Скільки вже зібрано (грн):</label>
-                    <input type="number" class="form-control" id="current_amount" name="current_amount" value="0" required>
+                    <input type="number" class="form-control" id="current_amount" name="current_amount" value="{{ old('current_amount', 0) }}" required>
                 </div>
 
                 <div class="form-group mt-3">
@@ -32,13 +31,14 @@
                          $categories = App\Models\Category::all();
                          @endphp
                         @foreach($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                                {{ $category->name }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
                 <div class="div d-flex justify-content-center">
                 <button type="submit" class="btn btn-block mt-4 text-white px-5" style="background-color: #2B2C27;">Розпочати збір коштів</button>
-
                 </div>
             </form>
             
@@ -50,8 +50,8 @@
     </div>
 </div>
 
-
 @endsection
+
 @push('js')
 <script>
     $(document).ready(function() {
@@ -65,7 +65,6 @@
             const currentAmount = parseInt(currentAmountInput.val());
 
             const progressPercentage = (currentAmount / goalAmount) * 100;
-
 
             progressBar.css('width', progressPercentage + '%');
             progressBar.text(progressPercentage.toFixed(2) + '%');

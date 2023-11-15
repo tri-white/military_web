@@ -10,12 +10,12 @@
 
                 <div class="form-group">
                     <label for="header">Заголовок:</label>
-                    <input type="text" class="form-control" id="header" name="header" required>
+                    <input type="text" class="form-control" id="header" name="header" value="{{ old('header') }}" required>
                 </div>
 
                 <div class="form-group">
                     <label for="content">Опис:</label>
-                    <textarea class="form-control" id="content" name="content" rows="4" required></textarea>
+                    <textarea class="form-control" id="content" name="content" rows="4" required>{{ old('content') }}</textarea>
                 </div>
 
                 <div class="form-group">
@@ -30,13 +30,15 @@
                          $categories = App\Models\Category::all();
                          @endphp
                         @foreach($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                                {{ $category->name }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
                 <div class="div d-flex justify-content-center">
-                <button type="submit" class="btn text-white px-5 btn-block mt-4" style="background-color: #2B2C27;">Створити оголошення</button>
-</div>
+                    <button type="submit" class="btn text-white px-5 btn-block mt-4" style="background-color: #2B2C27;">Створити оголошення</button>
+                </div>
             </form>
         </div>
     </div>

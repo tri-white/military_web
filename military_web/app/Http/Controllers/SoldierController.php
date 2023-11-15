@@ -43,7 +43,7 @@ class SoldierController extends Controller
     public function create_postFundraising(Request $request, $userid)
     {
         $request->validate([
-            'purpose' => 'required|string',
+            'purpose' => 'required|string|max:50',
             'goal_amount' => 'required|numeric|min:0',
             'current_amount' => 'required|numeric|min:0',
             'category_id' => 'required|exists:category,id',
