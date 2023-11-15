@@ -22,13 +22,8 @@ class LotPostController extends Controller
         if ($category !== 'all') {
             $query->where('category_id', $category);
         }
-   
-
-        if ($sort === 'price-desc') {
-            $query->orderBy('buy_price', 'desc');
-        } elseif ($sort === 'price-asc') {
-            $query->orderBy('buy_price', 'asc');
-        } elseif ($sort === 'date-desc') {
+        
+        if ($sort === 'date-desc') {
             $query->orderBy('created_at', 'desc');
         } elseif ($sort === 'date-asc') {
             $query->orderBy('created_at', 'asc');
@@ -45,8 +40,6 @@ class LotPostController extends Controller
         } elseif ($sort === 'time-asc') {
             $query->orderBy('expiration_datetime', 'desc');
         }
-
-
 
         $lotPosts = $query->get();
 

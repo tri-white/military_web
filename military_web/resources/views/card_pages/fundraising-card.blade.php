@@ -21,7 +21,7 @@
                             {{ number_format($progress, 0) }}%
                         </div>
                         <div class="text-center" style="color: gray; position: absolute; left: 50%; bottom: 55px; transform: translateX(-50%); font-weight: bold;">
-                            {{ number_format($post->current_amount, 0) }} / {{ number_format($post->goal_amount, 0) }}
+                            {{ number_format($post->current_amount, 0) }} / {{ number_format($post->goal_amount, 0) }} грн.
                         </div>
                         
                     </div>

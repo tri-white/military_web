@@ -11,7 +11,7 @@
                 <div class="col-9">
                     <div class="card-body" style="height:82%;">
                         <h5 class="mx-0 px-0 card-title d-flex justify-content-between">
-                            <span class="pe-5" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width:90%;">
+                            <span class="pe-5" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width:60%;">
                                 {{ $postBid->header }}
                             </span>
                             <span class="d-flex text-end justify-end"
@@ -35,7 +35,7 @@
                         </div>
                         <div class="col-5 text-center">
                                     @if ($postBid->current_bid > 0)
-                                    <p class="">Поточна ставка: ${{ $postBid->current_bid }}</p>
+                                    <p class="">Поточна ставка: {{ $postBid->current_bid }} грн.</p>
                                     @else
                                     <p class="card-text text-success">Цей лот безкоштовний!</p>
                                     @endif
