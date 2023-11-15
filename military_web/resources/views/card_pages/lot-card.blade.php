@@ -29,7 +29,7 @@
                         <div class="col-4">
                             <p class="text-start">
                                 До завершення:
-                                {{ \Carbon\Carbon::parse($postBid->expiration_datetime)->subHours(2)->diffForHumans(null, true) }}
+                                {{ \Carbon\Carbon::parse($postBid->expiration_datetime)->diffForHumans(null, true) }}
                             </p>
 
                         </div>

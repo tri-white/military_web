@@ -62,9 +62,14 @@
 
 @push('js')
 <script>
-    const volunteerCheckbox = document.getElementById('volunteer');
+     const volunteerCheckbox = document.getElementById('volunteer');
     const currentBidGroup = document.getElementById('currentBidGroup');
     const listingForm = document.getElementById('listingForm');
+
+    @if ($errors->any())
+        currentBidGroup.style.display = '{{ old('volunteer') ? 'none' : 'block' }}';
+        listingForm.action = '{{ old('volunteer') ? route('create_post-bidFree', Auth::user()->id) : route('create_post-bid', Auth::user()->id) }}';
+    @endif
 
     volunteerCheckbox.addEventListener('change', function () {
         if (this.checked) {
