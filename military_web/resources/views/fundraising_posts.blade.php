@@ -36,7 +36,7 @@
                                  <option value="summ-desc" {{ $selectedSort == 'summ-desc' ? 'selected' : '' }}>По сумі яка залишилася (грн) (↓)</option>
                                  <option value="summ-asc" {{ $selectedSort == 'summ-asc' ? 'selected' : '' }}>По сумі яка залишилася (грн) (↑)</option>
                                  <option value="collected-desc" {{ $selectedSort == 'collected-desc' ? 'selected' : '' }}>По сумі яку зібрано (грн) (↓)</option>
-                                 <option value="collected-asc" {{ $selectedSort == 'colected-asc' ? 'selected' : '' }}>По сумі яку зібрано (грн) (↑)</option>
+                                 <option value="collected-asc" {{ $selectedSort == 'collected-asc' ? 'selected' : '' }}>По сумі яку зібрано (грн) (↑)</option>
                                  <option value="header-desc"  {{ $selectedSort == 'header-desc' ? 'selected' : '' }}>По заголовку (↓)</option>
                                  <option value="header-asc" {{ $selectedSort == 'header-asc' ? 'selected' : '' }}>По заголовку (↑)</option>
                                  <option value="date-desc" {{ $selectedSort == 'date-desc' ? 'selected' : '' }}>По даті додавання (↓)</option>
