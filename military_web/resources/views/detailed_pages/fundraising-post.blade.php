@@ -24,14 +24,33 @@
                         </div>
                     </div>
 
+                    <div class="row d-flex justify-content-between">
+                        <div class="col-6">
+                            Дата створення: {{ $fundraisingPost->created_at->format('d/m/Y') }}
+                        </div>
+                        <div class="col-6 text-end">
+                            @php
+                            $name = App\Models\Category::where('id',$fundraisingPost->category_id)->first()->name;
+                            @endphp
+                            {{ $name }}
+
+                        </div>
+                    </div>
+                   
                     @php
                     $user = App\Models\User::where('id', $fundraisingPost->user_id)->first();
                     @endphp
                     <hr>
-                    <a href="{{ route('profile', $user->id) }}">
-                        <p>Повне ім'я: {{ $user->name }}</p>
-                        <p>Електронна скринька: {{ $user->email }}</p>
-                    </a>
+                    <h3 class="text-center">Збирач коштів</h3>
+                        <p>
+                    
+                            Імя: <a href="{{ route('profile', $user->id) }}">
+                                {{ $user->name }} 
+</a>
+                            </p>
+                        <p>Ранг: {{ $user->military_rank }} </p>
+                        <p>Склад: {{ $user->composition }}</p>
+                        <p>Профіль: {{ $user->profile }}</p>
                 </div>
             </div>
         </div>
@@ -45,7 +64,7 @@
                             <label for="donationAmount">Введіть суму:</label>
                             <input type="number" name="donationAmount" id="donationAmount" class="form-control" min="1">
                         </div>
-                        <button type="submit" class="btn text-white mt-3" style="background-color: #B5C186;">Сплатити</button>
+                        <button type="submit" class="btn text-white mt-3" style="background-color: #B5C186;">Допомогти</button>
                     </form>
                 </div>
             </div>

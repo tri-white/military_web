@@ -39,12 +39,12 @@ Route::get('/asks/page={page}/searchKey={searchKey}/category={category}/sort={so
 Route::get('/ask-post/{postid}', [AskPostController::class, 'showPost'])->name('ask-post');
 Route::post('/search-ask', [AskPostController::class, 'search'])->name('search-asks');
 
+Route::get('/profile/{userid}', [AuthController::class, 'profile'])->name('profile');
 
 
 
 Route::middleware(['auth'])->group(function () {
     // user profile/logout
-    Route::get('/profile/{userid}', [AuthController::class, 'profile'])->name('profile');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
    // Email verification
