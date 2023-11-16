@@ -14,31 +14,28 @@
                 </div>
                 <div class="col-9">
                     <div class="card-body" style="height:82%;">
-                    <h5 class="mx-0 px-0 card-title d-flex justify-content-between">
-                                <span class="pe-5" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width:60%;">
-                                    {{ $postAsk->header }}
-                                </span>
-                                <span class="d-flex text-end justify-end"
-                                    style="font-size:16px; color: gray; position:absolute; right:25px; top:15px;">
-                                    {{ $category->name }}
-                                </span>
-
-                    </h5>
-                       
+                        <h5 class="mx-0 px-0 card-title d-flex justify-content-between">
+                            <span class="pe-5"
+                                style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width:60%;">
+                                {{ $postAsk->header }}
+                            </span>
+                            <span class="d-flex text-end justify-end"
+                                style="font-size:16px; color: gray; position:absolute; right:25px; top:15px;">
+                                {{ $category->name }}
+                            </span>
+                        </h5>
                         <div class="col-12">
                             <p class="card-text"
                                 style="display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; max-height: 100%;">
                                 {{ $postAsk->content }}</p>
                         </div>
                     </div>
-
                     <div class="row ms-3">
                         <div class="col-4">
                             <p class="text-start">
                                 Кількість пропозицій:
                                 {{ $propositionCount }}
                             </p>
-
                         </div>
                         <div class="col-2 text-center">
                         </div>
@@ -48,8 +45,8 @@
                             </p>
                         </div>
                     </div>
-
                 </div>
             </div>
+        </div>
     </a>
 </div>
