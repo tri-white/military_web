@@ -3,12 +3,12 @@
 @section('content')
 @php
     $category = App\Models\Category::where('id', $postBid->category_id)->first();
+    $finished = \Carbon\Carbon::now()->isAfter($postBid->expiration_datetime);
 @endphp
 
 <div class="container my-5">
     <div class="row">
         <div class="col-9">
-            <a href="{{ route('lot-post', ['postid' => $postBid->id]) }}" class="card-link" style="text-decoration: none; color: inherit;">
                 <div class="card mb-4">
                     <div class="row g-0">
                         <div class="col-3 p-3" style="height: 400px; width: 400px;">
@@ -19,6 +19,7 @@
                                 <h5 class="mx-0 px-0 card-title" style="font-size:24px;">
                                     {{ $postBid->header }}
                                 </h5>
+                                @if(!$finished)
                                 <div class="row ms-3 text-center" style="font-size:32px;">
                                         @if ($postBid->current_bid > 0)
                                             <p class="">Поточна ставка: {{ $postBid->current_bid }} грн.</p>
@@ -26,11 +27,16 @@
                                             <p class="card-text text-success">Цей лот безкоштовний!</p>
                                         @endif
                                 </div>
+                                @else
+                                <p class="text-center text-success fs-1 align-items-center"> Ставки завершено! </p>
+                                @endif
                                 <div class="row">
+                            @if(!$finished)
                             <p class="text-center">
                                 До завершення:
                                 {{ \Carbon\Carbon::now()->diffForHumans(\Carbon\Carbon::parse($postBid->expiration_datetime), true) }}
                             </p>
+                            @endif
                         </div>
 
 
@@ -41,7 +47,6 @@
                         </div>
                     </div>
                 </div>
-            </a>
         </div>
         <div class="col-3">
             <div class="card mb-3">
@@ -65,3 +70,25 @@
     </div>
 </div>
 @endsection
+@push('js')
+<script>
+    function updateContent() {
+        // Use AJAX to fetch the updated data from the server
+        $.ajax({
+            url: '{{ route('lot-post', ['postid' => $postBid->id]) }}',
+            method: 'GET',
+            dataType: 'html',
+            success: function(response) {
+                // Replace the content of the container with the updated data
+                $('#live-update-container').html(response);
+            },
+            error: function(error) {
+                console.error('Error fetching updated data:', error);
+            },
+        });
+    }
+
+    // Update the content every 5 seconds (adjust the interval as needed)
+    setInterval(updateContent, 1000);
+</script>
+@endpush

@@ -11,7 +11,7 @@
 
     @stack('css')
 </head>
-<body class="d-flex flex-column min-vh-100" style="background-color: #515647;"> <!-- Set the background color here -->
+<body class="d-flex flex-column min-vh-100" id="live-update-container" style="background-color: #515647;"> <!-- Set the background color here -->
     @include('shared/header')
     @if ($errors->any())
         <div class="alert alert-danger">
