@@ -75,6 +75,9 @@ class LotPostController extends Controller
     public function placeBid(Request $request, $postid){
         return redirect()->back();
     }
+    public function getFreeLot(Request $request, $postid){
+        return redirect()->back();
+    }
     public function search(Request $request)
     {
         $searchKey = $request->input('search-input-key');

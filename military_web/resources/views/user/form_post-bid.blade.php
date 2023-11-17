@@ -35,7 +35,7 @@
 
                 <div class="form-group" id="currentBidGroup" style="{{ old('volunteer') ? 'display:none' : 'display:block' }}">
                     <label for="current_bid">Початкова ціна (грн):</label>
-                    <input type="number" class="form-control" id="current_bid" name="current_bid" step="0.01" value="{{ old('current_bid') }}">
+                    <input type="number" class="form-control" id="current_bid" name="current_bid" step="1" min="1" value="{{ old('current_bid') }}">
                 </div>
 
                 <div class="form-group mt-3">

@@ -51,6 +51,16 @@
                 </div>
             </div>
             @endif
+            @if($postBid->current_bid==0 && !$finished)
+            <div class="card mb-3">
+                    <div class="card-body">
+                        <form action="{{ route('get-free-lot', $postBid->id) }}" method="post">
+                            @csrf
+                            <button type="submit" class="btn text-white w-100 border-0 my-auto py-3" style="background-color: #B5C186;">Забрати лот</button>
+                        </form>
+                    </div>
+                </div>
+            @endif
             
             <div class="card mb-3">
                 <div class="card-body">
