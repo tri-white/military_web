@@ -77,3 +77,25 @@
  
 </div>
 @endsection
+@push('js')
+<script>
+    function updateContent() {
+        // Use AJAX to fetch the updated data from the server
+        $.ajax({
+            url: '{{ route('lot-post', ['postid' => $postBid->id]) }}',
+            method: 'GET',
+            dataType: 'html',
+            success: function(response) {
+                // Replace the content of the container with the updated data
+                $('#live-update-container').html(response);
+            },
+            error: function(error) {
+                console.error('Error fetching updated data:', error);
+            },
+        });
+    }
+
+    // Update the content every 5 seconds (adjust the interval as needed)
+    setInterval(updateContent, 1000);
+</script>
+@endpush

@@ -27,6 +27,7 @@
                     </div>
                     <div class="row ms-3">
                         <div class="col-4">
+                            
                             <p class="text-start">
                                 До завершення:
                                 {{ \Carbon\Carbon::parse($postBid->expiration_datetime)->diffForHumans(null, true) }}
