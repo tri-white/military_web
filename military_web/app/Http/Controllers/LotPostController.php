@@ -72,7 +72,7 @@ class LotPostController extends Controller
             'user' => $author,
         ]);
     }
-    public function bid(Request $request, $postid){
+    public function placeBid(Request $request, $postid){
         return redirect()->back();
     }
     public function search(Request $request)

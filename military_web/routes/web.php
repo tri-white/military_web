@@ -104,4 +104,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::post('/ask-post/{postid}/propose', [AskPostController::class, 'propose'])->name('ask-post-propose');
 
+    Route::post('/place-bid/{postid}', [LotPostController::class, 'placeBid'])->name('place-bid');
+
+
+
 });
