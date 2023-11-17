@@ -39,7 +39,7 @@ Route::get('/asks/page={page}/searchKey={searchKey}/category={category}/sort={so
 Route::get('/ask-post/{postid}', [AskPostController::class, 'showPost'])->name('ask-post');
 Route::post('/search-ask', [AskPostController::class, 'search'])->name('search-asks');
 
-Route::get('/profile/{userid}', [AuthController::class, 'profile'])->name('profile');
+Route::get('/profile/{userid}', [UserController::class, 'profile'])->name('profile');
 
 Route::get('/lot-post-partial/{postid}', [LotPostController::class, 'lotPostPartial'])->name('lot-post-partial');
 

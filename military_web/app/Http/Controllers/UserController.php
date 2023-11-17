@@ -11,7 +11,9 @@ class UserController extends Controller
     public function form_postBid(){
         return view('user/form_post-bid');
     }
-
+    public function profile($userid){
+        return redirect()->back();
+    }
     public function create_postBid(Request $request, $userid)
     {
         $request->validate([
