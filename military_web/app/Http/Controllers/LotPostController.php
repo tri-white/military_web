@@ -92,4 +92,11 @@ class LotPostController extends Controller
             'sort' => $sort,
         ]);
     }
+    public function lotPostPartial($postid)
+    {
+        $postBid = PostBid::find($postid);
+        $finished = \Carbon\Carbon::now()->isAfter($postBid->expiration_datetime);
+
+        return view('partial.lot-post-partial', compact('postBid', 'finished'));
+    }
 }

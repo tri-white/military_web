@@ -41,6 +41,7 @@ Route::post('/search-ask', [AskPostController::class, 'search'])->name('search-a
 
 Route::get('/profile/{userid}', [AuthController::class, 'profile'])->name('profile');
 
+Route::get('/lot-post-partial/{postid}', [LotPostController::class, 'lotPostPartial'])->name('lot-post-partial');
 
 
 Route::middleware(['auth'])->group(function () {
