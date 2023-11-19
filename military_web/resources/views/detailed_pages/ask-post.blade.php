@@ -58,14 +58,14 @@
         </div>
     </div>
 
-
-    <!-- Form for making propositions -->
+    @if(Auth::check())
+    @if(Auth::user()->id != $postAsk->user_id)
     <h5 class="text-white fs-3 my-4 text-center">Зробити пропозицію</h5>
 
     <div class="card mb-4">
         <div class="card-body">
             <h5 class="card-title">Зробити пропозицію</h5>
-            <form method="POST" action="{{ route('ask-post-propose', ['postid' => $postAsk->id]) }}">
+            <form method="POST" action="{{ route('ask-post-propose', ['postid' => $postAsk->id, 'userid'=>Auth::user()->id]) }}">
                 @csrf
                 <div class="form-group">
                     <label for="price">Ціна</label>
@@ -83,6 +83,8 @@
             </form>
         </div>
     </div>
+    @endif
+    @endif
 
     <!-- List of propositions -->
 <div class="row">
