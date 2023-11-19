@@ -60,46 +60,39 @@
 
 
     <!-- Form for making propositions -->
+    <h5 class="text-white fs-3 my-4 text-center">Зробити пропозицію</h5>
+
     <div class="card mb-4">
         <div class="card-body">
-            <h5 class="card-title">Make a Proposition</h5>
+            <h5 class="card-title">Зробити пропозицію</h5>
             <form method="POST" action="{{ route('ask-post-propose', ['postid' => $postAsk->id]) }}">
                 @csrf
                 <div class="form-group">
-                    <label for="price">Price</label>
-                    <input type="number" name="price" id="price" class="form-control">
+                    <label for="price">Ціна</label>
+                    <input type="number" name="price" required min="0" id="price" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="photo">Photo</label>
+                    <label for="photo">Фотографія (необовязково)</label>
                     <input type="file" name="photo" id="photo" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea name="message" id="message" class="form-control"></textarea>
+                    <label for="message">Коментар</label>
+                    <textarea name="message" id="message" class="form-control" required></textarea>
                 </div>
-                <input type="hidden" name="post_ask_id" value="{{ $postAsk->id }}">
-                <input type="hidden" name="user_id" value="{{ Auth::id() }}">
-                <button type="submit" class="btn btn-primary">Submit Proposition</button>
+                <button type="submit" class="btn" style="background-color: #B5C186;">Запропонувати</button>
             </form>
         </div>
     </div>
 
     <!-- List of propositions -->
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">Propositions</h5>
+<div class="row">
+<h5 class="text-white fs-3 my-4 text-center">Пропозиції</h5>
             <ul>
                 @foreach ($propositions as $proposition)
-                    <li>
-                        Price: ${{ $proposition->price }}
-                        <br>
-                        Message: {{ $proposition->message }}
-                        <br>
-                        <!-- Display the user's information here -->
-                    </li>
+                    @include('card_pages/proposition-card')
                 @endforeach
             </ul>
-        </div>
-    </div>
+</div>
+  
 </div>
 @endsection
