@@ -4,8 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\PostBid;
+use App\Models\Bid;
 use App\Models\User;
 use App\Models\Category;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\LotWinnerNotification;
+use App\Mail\LotWon;
+use Illuminate\Support\Facades\Auth;
+
 class LotPostController extends Controller
 {
     public function index($page,$searchKey, $category, $sort){
@@ -72,11 +78,57 @@ class LotPostController extends Controller
             'user' => $author,
         ]);
     }
-    public function placeBid(Request $request, $postid){
-        return redirect()->back();
+    public function placeBid(Request $request, $postid, $userid)
+    {
+        $post = PostBid::findOrFail($postid);
+        $user = User::find($userid);
+
+
+        if ($post->expiration_datetime->isPast()) {
+            return redirect()->back()->with('error', 'Ставку не можливо зробити. Аукціон вже завершено.');
+        }
+
+        $newBidAmount = (float)$request->input('newBid');
+
+        if ($newBidAmount <= $post->current_bid) {
+            return redirect()->back()->with('error', 'Ставку не виконано. Вже існує вища ставка.');
+        }
+
+        $bid = new Bid();
+        $bid->user_id = $user->id;
+        $bid->bid_amount = $newBidAmount;
+        $bid->post_id = $post->id;
+        $bid->save();
+
+        $post->current_bid = $newBidAmount;
+        $post->save();
+
+        return redirect()->back()->with('success', 'Ставку зроблено.');
     }
-    public function getFreeLot(Request $request, $postid){
-        return redirect()->back();
+    public function getFreeLot(Request $request, $postid, $userid)
+    {
+        $postBid = PostBid::findOrFail($postid);
+        $author = User::find($postBid->user_id);
+        $user= User::find($userid);
+    
+    
+        Mail::to(Auth::user()->email)->send(new LotWinnerNotification($userid, $postid, $author->id));
+    
+        Mail::to($author->email)->send(new LotWon($userid, $postid, $author->id));
+
+        $postBid->delete();
+
+        $page = 1;
+        $search = "null";
+        $cat = "all";
+        $sort = "date-desc";
+        
+        return redirect()->route('lot-posts', [
+            'page' => $page,
+            'searchKey' => $search,
+            'category' => $cat,
+            'sort' => $sort,
+        ])->with('success', 'Ви виграли аукціон! Перевірте повідомлення у електронній скриньці');        
     }
     public function search(Request $request)
     {

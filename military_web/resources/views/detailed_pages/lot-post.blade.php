@@ -33,33 +33,38 @@
 
         </div>
         <div class="col-3">
-            @if(!$finished && $postBid->current_bid > 0)
-
+            @if(!$finished && $postBid->current_bid > 0 && Auth::check())
+            @if(Auth::user()->role_id!=1)
             <div class="card mb-3">
                 <div class="card-body">
-                        <form action="{{ route('place-bid', ['postid' => $postBid->id]) }}" method="post">
-                            @csrf
-                            <div class="mb-3">
-                                <label for="newBid" class="form-label text-center fs-4 w-100 mb-3" >Зробити вищу ставку</label>
-                                <div class="input-group">
-                                    <input type="number" value="{{ $postBid->current_bid * 1.01 }}" class="form-control text-center fs-4" id="newBid" name="newBid" required min="{{ $postBid->current_bid * 1.01 }}">
-                                    <span class="input-group-text">грн.</span>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100 border-0" style="background-color: #B5C186;">Підтвердити</button>
-                        </form>
+                <form action="{{ route('place-bid', ['postid' => $postBid->id, 'userid'=>Auth::user()->id]) }}" method="post">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="newBid" class="form-label text-center fs-4 w-100 mb-3" >Зробити вищу ставку</label>
+                        <div class="input-group">
+                            <input type="number" value="{{ round($postBid->current_bid * 1.01) }}" class="form-control text-center fs-4" id="newBid" name="newBid" required min="{{ round($postBid->current_bid * 1.01) }}" step="1">
+                            <span class="input-group-text">грн.</span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 border-0" style="background-color: #B5C186;">Підтвердити</button>
+                </form>
+
+
                 </div>
             </div>
             @endif
-            @if($postBid->current_bid==0 && !$finished)
-            <div class="card mb-3">
-                    <div class="card-body">
-                        <form action="{{ route('get-free-lot', $postBid->id) }}" method="post">
-                            @csrf
-                            <button type="submit" class="btn text-white w-100 border-0 my-auto py-3" style="background-color: #B5C186;">Забрати лот</button>
-                        </form>
+            @endif
+            @if($postBid->current_bid==0 && !$finished && Auth::check())
+                @if(Auth::user()->role_id!=1 && Auth::user()->id != $postBid->user_id)
+                <div class="card mb-3">
+                        <div class="card-body">
+                            <form action="{{ route('get-free-lot', ['postid'=>$postBid->id, 'userid'=>Auth::user()->id]) }}" method="post">
+                                @csrf
+                                <button type="submit" class="btn text-white w-100 border-0 my-auto py-3" style="background-color: #B5C186;">Забрати лот</button>
+                            </form>
+                        </div>
                     </div>
-                </div>
+                @endif
             @endif
             
             <div class="card mb-3">
