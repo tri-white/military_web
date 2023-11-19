@@ -38,8 +38,8 @@
                     <h5 class="card-title">Додаткова інформація</h5>
                     <p class="card-text">Категорія: {{ $category->name }}</p>
                     <p class="card-text">Дата публікації: {{ $postAsk->created_at }}</p>
-                    <p class="card-text">Останнє оновлення: {{ $postAsk->updated_at }}</p>
                     <p class="card-text">Кількість пропозицій: {{ $propositionCount }}</p>
+                    <p class="card-text">Прийнятих пропозицій: {{ $postAsk->accepted_propositions }}</p>
                 </div>
             </div>
         </div>
@@ -65,7 +65,7 @@
     <div class="card mb-4">
         <div class="card-body">
             <h5 class="card-title">Зробити пропозицію</h5>
-            <form method="POST" action="{{ route('ask-post-propose', ['postid' => $postAsk->id, 'userid'=>Auth::user()->id]) }}">
+            <form method="POST" action="{{ route('ask-post-propose', ['postid' => $postAsk->id, 'userid'=>Auth::user()->id]) }}" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label for="price">Ціна</label>

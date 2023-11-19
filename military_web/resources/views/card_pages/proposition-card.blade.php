@@ -19,12 +19,13 @@
                 <small>{{ $proposition->created_at->diffForHumans() }}</small>
             </div>
             @if ($proposition->photo)
-                <img src="{{ asset($proposition->photo) }}" alt="Фото пропозиції" class="align-self-center mx-auto text-center d-flex justify-content-center" style="width: 300px; height: 300px; object-fit: cover;">
+                <img src="{{ $proposition->photo ? asset(str_replace('public/', 'storage/', $proposition->photo)) : asset('no-image.jpg') }}" alt="Фото пропозиції" class="align-self-center mx-auto text-center d-flex justify-content-center border-1 border-dark" style="width: 300px; height: 300px; object-fit: cover;">
              @endif
             <p class="card-text">{{ $proposition->message }}</p>
-            <p class="card-text">Price: {{ $proposition->price }} грн.</p>
+            <p class="card-text">Вартість: {{ $proposition->price }} грн.</p>
             @if (Auth::check() && $post_author->id == Auth::user()->id)
-                <form method="POST" action="">
+                <form method="POST" action="{{ route('accept-proposition', $proposition->id) }}">
+                    @csrf
                     <button class="btn btn-success" type="submit">Прийняти пропозицію</button>
                 </form>
             @endif

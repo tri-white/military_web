@@ -103,10 +103,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         
     Route::post('/lot-post/{postid}/place-bid', [LotPostController::class, 'bid'])->name('lot-post-bid');
 
-    Route::post('/ask-post/{postid}/propose', [AskPostController::class, 'propose'])->name('ask-post-propose');
+    Route::post('/ask-post/{postid}/{userid}/propose', [AskPostController::class, 'propose'])->name('ask-post-propose');
 
     Route::post('/place-bid/{postid}/{userid}', [LotPostController::class, 'placeBid'])->name('place-bid');
     Route::post('/get-free-lot/{postid}/{userid}', [LotPostController::class, 'getFreeLot'])->name('get-free-lot');
+    Route::post('/accept-proposition/{propositionid}', [AskPostController::class, 'acceptProposition'])->name('accept-proposition');
 
 
 

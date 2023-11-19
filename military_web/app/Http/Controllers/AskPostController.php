@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\PostAsk;
 use App\Models\Proposition;
 use App\Models\Category;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AcceptedProposition;
+use App\Mail\PropositionAdded;
+use App\Models\User;
 class AskPostController extends Controller
 {
     public function index($page,$searchKey, $category, $sort){
@@ -67,29 +71,28 @@ class AskPostController extends Controller
             'propositions' => $propositions,
         ]);
     }
-    public function propose(Request $request, $postid)
+    public function propose(Request $request, $postid, $userid)
     {
-        // Validate the request data
         $request->validate([
             'price' => 'required|numeric|min:0',
-           
             'message' => 'required|string',
-            'post_ask_id' => 'required|exists:post_ask,id',
-            'user_id' => 'required|exists:users,id',
+            'photo' => 'image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        // Handle the submission and save the proposition to the database
         $proposition = new Proposition();
         $proposition->price = $request->input('price');
         $proposition->message = $request->input('message');
-        $proposition->post_ask_id = $request->input('post_ask_id');
-        $proposition->user_id = $request->input('user_id');
+        $proposition->post_ask_id = $postid;
+        $proposition->user_id = $userid;
 
-        // Handle photo upload if provided
+        if ($request->hasFile('photo')) {
+            $photoPath = $request->file('photo')->store('public/propositions');
+            $proposition->photo = $photoPath;
+        }
 
         $proposition->save();
 
-        return redirect()->route('ask-post', ['postid' => $postid])->with('success', 'Proposition submitted successfully');
+        return redirect()->route('ask-post', ['postid' => $postid])->with('success', 'Пропозицію успішно створено');
     }
     public function search(Request $request)
     {
@@ -107,5 +110,28 @@ class AskPostController extends Controller
             'category' => $category,
             'sort' => $sort,
         ]);
+    }
+    public function acceptProposition(Request $request, $propositionid){
+        $proposition = Proposition::find($propositionid);
+
+        if (!$proposition) {
+            return redirect()->back()->with('error', 'Пропозицію не знайдено.');
+        }
+    
+        
+        $post = PostAsk::find($proposition->post_ask_id);
+        $propositionAuthor = User::find($proposition->user_id);
+        $postAuthor = User::find($post->user_id);
+    
+        Mail::to($propositionAuthor->email)->send(new AcceptedProposition($proposition, $post, $propositionAuthor, $postAuthor));
+        Mail::to($postAuthor->email)->send(new PropositionAdded($proposition, $post, $propositionAuthor, $postAuthor));
+    
+        $proposition->delete();
+    
+        $post->accepted_propositions += 1;
+        $post->save();
+    
+
+        return redirect()->back()->with('success', 'Пропозицію успішно прийнято! Перевірте вашу електронну скриньку.');
     }
 }
