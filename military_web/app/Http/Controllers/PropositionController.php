@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Proposition;
 use App\Models\User;
 use App\Mail\ChangedProposition;
+use Illuminate\Support\Facades\Mail;
 use App\Mail\RemovedProposition;
 class PropositionController extends Controller
 {

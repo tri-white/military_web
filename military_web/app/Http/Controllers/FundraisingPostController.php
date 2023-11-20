@@ -7,6 +7,7 @@ use App\Models\PostMoney;
 use App\Models\Category;
 use App\Models\User;
 use App\Mail\ChangedFundraising;
+use Illuminate\Support\Facades\Mail;
 use App\Mail\RemovedFundraising;
 class FundraisingPostController extends Controller
 {
@@ -73,7 +74,9 @@ class FundraisingPostController extends Controller
     public function showPost($postid)
     {
         $fundraisingPost = PostMoney::findOrFail($postid);
-
+        if (!$fundraisingPost) {
+            return redirect()->route('welcome')->with('error', 'Оголошення не знайдено');
+        }
         return view('detailed_pages/fundraising-post', compact('fundraisingPost'));
     }
     

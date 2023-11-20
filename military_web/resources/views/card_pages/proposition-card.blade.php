@@ -7,13 +7,18 @@
                         <a href="{{ route('edit-proposition', ['propositionid' => $proposition->id]) }}" class="text-dark me-4">
                             <i class="fas fa-edit"></i> Редагувати
                         </a>
-                         <!-- Delete Form -->
-                         <form action="{{ route('remove-proposition', ['propositionid' => $proposition->id, 'userid'=>Auth::user()->id]) }}" method="POST" onsubmit="return confirm('Ви впевнені, що хочете видалити цей запис?');">
-                                    @csrf
-                                    <button type="submit" class="text-danger" style="background: none; border: none; cursor: pointer;">
-                                        <i class="fas fa-trash-alt"></i> Видалити
-                                    </button>
+                        @if(Auth::user()->id==$proposition->user_id)
+                        <form action="{{ route('remove-proposition', ['propositionid' => $proposition->id, 'userid'=>Auth::user()->id]) }}" method="POST" onsubmit="return confirm('Ви впевнені, що хочете видалити цей запис?');">
+                            @csrf
+                            <button type="submit" class="text-danger" style="background: none; border: none; cursor: pointer;">
+                                <i class="fas fa-trash-alt"></i> Видалити
+                            </button>
                         </form>
+                        @else
+                        <button type="button" class="text-danger" data-bs-toggle="modal" data-bs-target="#removeReasonModal">
+                            <i class="fas fa-trash-alt"></i> Видалити
+                        </button>
+                        @endif
                     </div>
                     @endif
                 @endif
@@ -46,3 +51,24 @@
             @endif
         </div>
     </div>
+    <div class="modal fade" id="removeReasonModal" tabindex="-1" role="dialog" aria-labelledby="removeReasonModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-dark" id="removeReasonModalLabel">Видалення пропозиції</h5>
+            </div>
+            <form action="{{ route('remove-proposition', ['propositionid' => $proposition->id, 'userid'=>Auth::user()->id]) }}" method="POST" onsubmit="return confirm('Ви впевнені, що хочете видалити цей запис?');">
+                @csrf
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="text" name="reason" class="form-control" placeholder="Причина видалення" required>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрити</button>
+                    <button type="submit" class="btn btn-danger">Видалити пропозицію</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

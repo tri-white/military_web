@@ -121,7 +121,6 @@
 </div>
 
 
- <!-- Modal for Disapproval Reason -->
  <div class="modal fade" id="removeReasonModal" tabindex="-1" role="dialog" aria-labelledby="removeReasonModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -132,7 +131,7 @@
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" name="reason" class="form-control" placeholder="Причина видалення оголошення" required>
+                        <input type="text" name="reason" class="form-control" placeholder="Причина видалення" required>
                     </div>
                 </div>
                 <div class="modal-footer d-flex justify-content-center">
