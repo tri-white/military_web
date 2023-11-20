@@ -70,7 +70,7 @@ class LotPostController extends Controller
         $postBid = PostBid::find($postid);
 
         if (!$postBid) {
-            return redirect()->route('welcome')->with('error', 'Post not found');
+            return redirect()->route('welcome')->with('error', 'Оголошення не знайдено');
         }
 
         $author = User::find($postBid->user_id);
