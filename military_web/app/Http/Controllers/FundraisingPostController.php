@@ -107,4 +107,12 @@ class FundraisingPostController extends Controller
             'sort' => $sort,
         ]);
     }
+    public function remove(Request $request, $postid, $userid){
+        $user = User::find($userid);
+        $post = PostMoney::find($postid);
+        //mail to user
+        $post->delete();
+
+        return redirect()->back()->with('success','Оголошення вилучено.');
+    }
 }

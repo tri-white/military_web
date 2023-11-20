@@ -8,7 +8,7 @@
                             <i class="fas fa-edit"></i> Редагувати
                         </a>
                          <!-- Delete Form -->
-                         <form action="{{ route('remove-proposition', ['propositionid' => $proposition->id]) }}" method="POST" onsubmit="return confirm('Ви впевнені, що хочете видалити цей запис?');">
+                         <form action="{{ route('remove-proposition', ['propositionid' => $proposition->id, 'userid'=>Auth::user()->id]) }}" method="POST" onsubmit="return confirm('Ви впевнені, що хочете видалити цей запис?');">
                                     @csrf
                                     <button type="submit" class="text-danger" style="background: none; border: none; cursor: pointer;">
                                         <i class="fas fa-trash-alt"></i> Видалити

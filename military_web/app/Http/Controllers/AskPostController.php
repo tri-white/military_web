@@ -61,7 +61,7 @@ class AskPostController extends Controller
         $postAsk = PostAsk::find($postid);
 
         if (!$postAsk) {
-            return redirect()->route('welcome')->with('error', 'Post not found');
+            return redirect()->route('welcome')->with('error', 'Оголошення не знайдено');
         }
 
         $propositions = Proposition::where('post_ask_id', $postid)->get();
@@ -133,5 +133,13 @@ class AskPostController extends Controller
     
 
         return redirect()->back()->with('success', 'Пропозицію успішно прийнято! Перевірте вашу електронну скриньку.');
+    }
+
+    public function remove(Request $request, $postid, $userid){
+        $user = User::find($userid);
+        $post = PostAsk::find($postid);
+        //
+        $post->delete();
+        return redirect()->back()->with('success','Оголошення вилучено.');
     }
 }

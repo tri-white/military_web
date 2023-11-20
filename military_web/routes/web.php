@@ -112,16 +112,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     Route::get('/fundraising/edit/{postid}', [FundraisingPostController::class, 'edit'])->name('edit-fund');
-    Route::post('/fundraising/remove/{postid}', [FundraisingPostController::class, 'remove'])->name('remove-fund');
+    Route::post('/fundraising/remove/{postid}/{userid}', [FundraisingPostController::class, 'remove'])->name('remove-fund');
 
     Route::get('/ask/edit/{postid}', [AskPostController::class, 'edit'])->name('edit-ask');
-    Route::post('/ask/remove/{postid}', [AskPostController::class, 'remove'])->name('remove-ask');
+    Route::post('/ask/remove/{postid}/{userid}', [AskPostController::class, 'remove'])->name('remove-ask');
 
     Route::get('/lot/edit/{postid}', [LotPostController::class, 'edit'])->name('edit-lot');
-    Route::post('/lot/remove/{postid}', [LotPostController::class, 'remove'])->name('remove-lot');
+    Route::post('/lot/remove/{postid}/{userid}', [LotPostController::class, 'remove'])->name('remove-lot');
 
     Route::get('/proposition/edit/{propositionid}', [PropositionController::class, 'edit'])->name('edit-proposition');
-    Route::post('/proposition/remove/{propositionid}', [PropositionController::class, 'remove'])->name('remove-proposition');
+    Route::post('/proposition/remove/{propositionid}/{userid}', [PropositionController::class, 'remove'])->name('remove-proposition');
 
 
 });

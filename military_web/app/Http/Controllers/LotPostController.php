@@ -154,4 +154,12 @@ class LotPostController extends Controller
 
         return view('partial.lot-post-partial', compact('postBid', 'finished'));
     }
+    public function remove(Request $request, $postid, $userid){
+        $user = User::find($userid);
+        $post = PostBid::find($postid);
+        //mail to user
+        $post->delete();
+
+        return redirect()->back()->with('success','Оголошення вилучено.');
+    }
 }
