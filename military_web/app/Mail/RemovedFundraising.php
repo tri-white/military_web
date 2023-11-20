@@ -8,7 +8,8 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-
+use App\Models\User;
+use App\Models\PostMoney;
 class RemovedFundraising extends Mailable
 {
     use Queueable, SerializesModels;
@@ -16,9 +17,10 @@ class RemovedFundraising extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public $reason;
+    public function __construct($reason)
     {
-        //
+        $this->reason = $reason;
     }
 
     /**
@@ -27,7 +29,7 @@ class RemovedFundraising extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Removed Fundraising',
+            subject: 'Ваш збір коштів видалено адміністратором [Military Trade]',
         );
     }
 

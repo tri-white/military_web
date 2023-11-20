@@ -8,17 +8,16 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-
+use App\Models\User;
+use App\Models\Proposition;
 class ChangedProposition extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     */
-    public function __construct()
+    public $reason;
+    public function __construct($reason)
     {
-        //
+        $this->reason = $reason;
     }
 
     /**
@@ -27,9 +26,10 @@ class ChangedProposition extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Changed Proposition',
+            subject: 'Вашу пропозицію відредаговано адміністратором [Military Trade]',
         );
     }
+
 
     /**
      * Get the message content definition.

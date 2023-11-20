@@ -8,7 +8,8 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-
+use App\Models\User;
+use App\Models\PostAsk;
 class ChangedAsk extends Mailable
 {
     use Queueable, SerializesModels;
@@ -16,9 +17,10 @@ class ChangedAsk extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public $reason;
+    public function __construct($reason)
     {
-        //
+        $this->reason = $reason;
     }
 
     /**
@@ -27,9 +29,10 @@ class ChangedAsk extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Changed Ask',
+            subject: 'Ваш запит на допомогу відредаговано адміністратором [Military Trade]',
         );
     }
+
 
     /**
      * Get the message content definition.
