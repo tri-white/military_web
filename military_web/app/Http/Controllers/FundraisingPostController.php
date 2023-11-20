@@ -130,4 +130,30 @@ class FundraisingPostController extends Controller
 
         return view('remove/remove-fundraising', compact('postMoney', 'userid'));
     }
+    public function edit($postid)
+    {
+        $post = PostMoney::find($postid);
+
+        return view('edit/fundraising-edit', compact('post'));
+    }
+    
+    public function editPostFundraising(Request $request, $userid, $postid)
+    {
+        $request->validate([
+            'purpose' => 'required|string|max:255',
+            'goal_amount' => 'required|numeric|min:0',
+            'category_id' => 'required|exists:category,id',
+        ]);
+    
+        $fundraisingPost = PostMoney::findOrFail($postid);
+    
+        $fundraisingPost->purpose = $request->input('purpose');
+        $fundraisingPost->goal_amount = $request->input('goal_amount');
+        $fundraisingPost->category_id = $request->input('category_id');
+    
+        $fundraisingPost->save();
+    
+        return redirect()->route('welcome')->with('success', 'Збір коштів успішно оновлено.');
+    }
+    
 }

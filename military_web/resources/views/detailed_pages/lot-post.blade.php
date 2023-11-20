@@ -31,7 +31,7 @@
                             </button>
                         </form>
                         @else
-                        <button type="button" class="text-danger" onclick="location.href='{{ route('remove-lot-form', ['postid' => $postBid->id, 'userid' => Auth::user()->id]) }}'">
+                        <button class="text-danger" onclick="location.href='{{ route('remove-lot-form', ['postid' => $postBid->id, 'userid' => Auth::user()->id]) }}'">
                             <i class="fas fa-trash-alt"></i> Видалити
                         </button>
 

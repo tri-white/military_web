@@ -137,4 +137,13 @@ Route::middleware(['auth', 'verified', 'checkBan'])->group(function () {
 
     Route::get('/edit-post-bid/{postid}', [LotPostController::class, 'edit'])->name('edit-post-bid');
     Route::post('/edit_post-bid/{userid}/{postid}', [LotPostController::class, 'editPostBid'])->name('edit_post-bid');
+
+    Route::get('/edit-post-fundraising/{postid}', [FundraisingPostController::class, 'edit'])->name('edit-post-fundraising');
+    Route::post('/edit_post-fundraising/{userid}/{postid}', [FundraisingPostController::class, 'editPostFundraising'])->name('edit_post-fundraising');
+
+    Route::get('/edit-post-ask/{postid}', [AskPostController::class, 'edit'])->name('edit-post-ask');
+    Route::post('/edit_post-ask/{userid}/{postid}', [AskPostController::class, 'editPostAsk'])->name('edit_post-ask');
+
+    Route::get('/edit-proposition/{propositionid}', [PropositionController::class, 'edit'])->name('edit-proposition');
+    Route::post('/edit_proposition/{userid}/{propositionid}', [PropositionController::class, 'editProposition'])->name('edit_proposition');
 });

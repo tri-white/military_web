@@ -18,7 +18,7 @@
                         @if(Auth::check())
                     @if(Auth::user()->role_id==3 || Auth::user()->id==$postAsk->user_id)
                     <div class="d-flex justify-content-end">
-                        <a href="{{ route('edit-ask', ['postid' => $postAsk->id]) }}" class="text-dark me-4">
+                        <a href="{{ route('edit-post-ask', ['postid' => $postAsk->id]) }}" class="text-dark me-4">
                             <i class="fas fa-edit"></i> Редагувати
                         </a>
                         <!-- Delete Form -->
