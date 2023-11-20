@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\AcceptedProposition;
 use App\Mail\PropositionAdded;
 use App\Models\User;
+use App\Mail\ChangedAsk;
+use App\Mail\RemovedAsk;
 class AskPostController extends Controller
 {
     public function index($page,$searchKey, $category, $sort){
@@ -141,7 +143,9 @@ class AskPostController extends Controller
 
         Proposition::where('post_ask_id', $postid)->delete();
         
-        //
+        if($request->has('reason'))
+            Mail::to($user->email)->send(new RemovedAsk($request->input('reason')));
+
         $post->delete();
         return redirect()->back()->with('success','Оголошення вилучено.');
     }

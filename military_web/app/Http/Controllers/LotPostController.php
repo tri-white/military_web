@@ -8,8 +8,10 @@ use App\Models\Bid;
 use App\Models\User;
 use App\Models\Category;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\LotWinnerNotification;
 use App\Mail\LotWon;
+use App\Mail\LotWinnerNotification;
+use App\Mail\ChangedLot;
+use App\Mail\RemovedLot;
 use Illuminate\Support\Facades\Auth;
 
 class LotPostController extends Controller
@@ -160,7 +162,10 @@ class LotPostController extends Controller
 
         Bid::where('post_id', $postid)->delete();
         
-        //mail to user
+        if($request->has('reason'))
+            Mail::to($user->email)->send(new RemovedLot($request->input('reason')));
+        
+
         $post->delete();
 
         return redirect()->back()->with('success','Оголошення вилучено.');

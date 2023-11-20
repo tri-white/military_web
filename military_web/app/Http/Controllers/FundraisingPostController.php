@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\PostMoney;
 use App\Models\Category;
 use App\Models\User;
+use App\Mail\ChangedFundraising;
+use App\Mail\RemovedFundraising;
 class FundraisingPostController extends Controller
 {
     public function index($page,$searchKey, $category, $sort){
@@ -110,7 +112,10 @@ class FundraisingPostController extends Controller
     public function remove(Request $request, $postid, $userid){
         $user = User::find($userid);
         $post = PostMoney::find($postid);
-        //mail to user
+
+        if($request->has('reason'))
+            Mail::to($user->email)->send(new RemovedFundraising($request->input('reason')));
+        
         $post->delete();
 
         return redirect()->back()->with('success','Оголошення вилучено.');
