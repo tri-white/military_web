@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8 text-white">
-            <h2 class="text-center mt-4 mb-4">Створення лоту</h2>
+            <h2 class="text-center mt-4 mb-4">Створення аукціону</h2>
             <form class="mb-5" action="{{ route('create_post-bid', Auth::user()->id) }}" method="POST" enctype="multipart/form-data" id="listingForm">
                 @csrf
 

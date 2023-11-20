@@ -24,7 +24,7 @@
                         </li>
                         <li class="nav-item mx-lg-2 mx-md-1 mx-sm-0 dropdown">
                             <a href="{{ route('lot-posts', ['page' => $page, 'searchKey'=>$search, 'category'=>$cat,'sort'=>$sort]) }}" class="text-decoration-none text-white">
-                                Лоти
+                                Аукціони
                             </a>
                         </li>
                         <li class="nav-item mx-lg-2 mx-md-1 mx-sm-0 dropdown">
@@ -41,11 +41,12 @@
                                +
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="{{ route('form_post-bid') }}">Створити лот</a></li>
+                                <li><a class="dropdown-item" href="{{ route('form_post-bid') }}">Створити аукціон</a></li>
                                 @if(Auth::user()->role_id === 2 || Auth::user()->role_id===3)
-                                <li><a class="dropdown-item" href="{{ route('form_post-ask') }}">Створити оголошення на пошук предметів</a></li>
-                                <li><a class="dropdown-item" href="{{ route('form_post-fundraising') }}">Створити оголошення на збір коштів</a></li>
+                                <li><a class="dropdown-item" href="{{ route('form_post-ask') }}">Створити запит на отримання допомоги</a></li>
+                                <li><a class="dropdown-item" href="{{ route('form_post-fundraising') }}">Розпочати збір коштів</a></li>
                                 @endif
+
                             </ul>
                         </li>
                         @endif

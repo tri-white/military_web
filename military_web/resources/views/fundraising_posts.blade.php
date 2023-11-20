@@ -1,7 +1,7 @@
 @extends('shared/layout')
 @push('css')
 @section('content')
-<h1 class="text-center mt-5 text-white"> Збори коштів військовим </h1>
+<h1 class="text-center mt-5 text-white"> Збори коштів </h1>
 <div class="container">
     <div class="row text-whit my-5 text-white">
      <div class="col-lg-12 text-center display-5">

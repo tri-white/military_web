@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container my-5 text-white">
-    <h1 class="text-center mt-5">Список лотів</h1>
+    <h1 class="text-center mt-5">Список аукціонів</h1>
     <div class="row text-whit my-5">
      <div class="col-lg-12 text-center display-5">
          Пошук
