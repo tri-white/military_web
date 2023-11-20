@@ -168,6 +168,12 @@ class LotPostController extends Controller
 
         $post->delete();
 
-        return redirect()->back()->with('success','Оголошення вилучено.');
+        return redirect()->route('welcome')->with('success','Оголошення вилучено.');
+    }
+    public function showRemoveForm($postid, $userid)
+    {
+        $postBid = PostBid::findOrFail($postid);
+
+        return view('remove/remove-lot', compact('postBid', 'userid'));
     }
 }

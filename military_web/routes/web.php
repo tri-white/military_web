@@ -124,4 +124,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/proposition/remove/{propositionid}/{userid}', [PropositionController::class, 'remove'])->name('remove-proposition');
 
 
+    Route::get('/remove-lot-form/{postid}/{userid}', [LotPostController::class, 'showRemoveForm'])->name('remove-lot-form');
+    Route::get('/remove-ask-form/{postid}/{userid}', [AskPostController::class, 'showRemoveForm'])->name('remove-ask-form');
+    Route::get('/remove-proposition-form/{propositionid}/{userid}', [PropositionController::class, 'showRemoveForm'])->name('remove-proposition-form');
+    Route::get('/remove-fundraising-form/{postid}/{userid}', [FundraisingPostController::class, 'showRemoveForm'])->name('remove-fundraising-form');
+    
+
 });

@@ -15,7 +15,7 @@
                             </button>
                         </form>
                         @else
-                        <button type="button" class="text-danger" data-bs-toggle="modal" data-bs-target="#removeReasonModal">
+                        <button type="button" class="text-danger" onclick="location.href='{{ route('remove-proposition-form', ['postid' => $postBid->id, 'userid' => Auth::user()->id]) }}'">
                             <i class="fas fa-trash-alt"></i> Видалити
                         </button>
                         @endif
@@ -57,7 +57,7 @@
             <div class="modal-header">
                 <h5 class="modal-title text-dark" id="removeReasonModalLabel">Видалення пропозиції</h5>
             </div>
-            <form action="{{ route('remove-proposition', ['propositionid' => $proposition->id, 'userid'=>Auth::user()->id]) }}" method="POST" onsubmit="return confirm('Ви впевнені, що хочете видалити цей запис?');">
+            <form action="{{ route('remove-proposition', ['propositionid' => $proposition->id, 'userid'=>Auth::user()->id]) }}" method="POST">
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">

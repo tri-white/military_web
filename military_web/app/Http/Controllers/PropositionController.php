@@ -19,6 +19,12 @@ class PropositionController extends Controller
             Mail::to($user->email)->send(new RemovedProposition($request->input('reason'), $post, $proposition));
         
         $proposition->delete();
-        return redirect()->back()->with('success','Пропозицію вилучено.');
+        return redirect()->route('welcome')->with('success','Пропозицію вилучено.');
+    }
+    public function showRemoveForm($propositionid, $userid)
+    {
+        $proposition = Proposition::findOrFail($propositionid);
+
+        return view('remove/remove-proposition', compact('proposition', 'userid'));
     }
 }

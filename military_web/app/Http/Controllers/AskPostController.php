@@ -147,6 +147,13 @@ class AskPostController extends Controller
             Mail::to($user->email)->send(new RemovedAsk($request->input('reason'), $post));
 
         $post->delete();
-        return redirect()->back()->with('success','Оголошення вилучено.');
+        
+        return redirect()->route('welcome')->with('success','Оголошення вилучено.');
+    }
+    public function showRemoveForm($postid, $userid)
+    {
+        $postAsk = PostAsk::findOrFail($postid);
+
+        return view('remove/remove-ask', compact('postAsk', 'userid'));
     }
 }
