@@ -39,7 +39,8 @@ class RemovedAsk extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'mails/remove/remove-ask',
+            with: ['reason' => $this->reason],
         );
     }
 

@@ -39,7 +39,8 @@ class RemovedLot extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'mails/remove/remove-lot',
+            with: ['reason' => $this->reason],
         );
     }
 

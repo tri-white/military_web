@@ -40,7 +40,8 @@ class ChangedAsk extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'mails/edit/edit-ask',
+            with: ['reason' => $this->reason],
         );
     }
 

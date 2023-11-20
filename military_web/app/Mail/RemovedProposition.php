@@ -39,7 +39,8 @@ class RemovedProposition extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'mails/remove/remove-proposition',
+            with: ['reason' => $this->reason],
         );
     }
 

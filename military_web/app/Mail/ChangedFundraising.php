@@ -39,7 +39,8 @@ class ChangedFundraising extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'mails/edit/edit-fundraising',
+            with: ['reason' => $this->reason],
         );
     }
 
