@@ -135,4 +135,6 @@ Route::middleware(['auth', 'verified', 'checkBan'])->group(function () {
 
     Route::get('/admin/unban-user/{user}', [AdminController::class, 'unbanUser'])->name('admin.unban-user');
 
+    Route::get('/edit-post-bid/{postid}', [LotPostController::class, 'edit'])->name('edit-post-bid');
+    Route::post('/edit_post-bid/{userid}/{postid}', [LotPostController::class, 'editPostBid'])->name('edit_post-bid');
 });
