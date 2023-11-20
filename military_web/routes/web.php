@@ -133,5 +133,6 @@ Route::middleware(['auth', 'verified', 'checkBan'])->group(function () {
     Route::get('/admin/users/{user}/ban-form', [AdminController::class, 'showBanForm'])->name('admin.ban-form');
     Route::post('/admin/users/{user}/process-ban-form', [AdminController::class, 'processBanForm'])->name('admin.process-ban-form');
 
+    Route::get('/admin/unban-user/{user}', [AdminController::class, 'unbanUser'])->name('admin.unban-user');
 
 });

@@ -29,12 +29,16 @@
                 @endif
 
                 <p>Роль: {{ $role }}</p>
-                <!-- Button for banning the user -->
+                
                 @if(Auth::check())
-                        @if(Auth::user()->id != $user->id && Auth::user()->role_id == 3)
-                        <button onclick="window.location.href='{{ route('admin.ban-form', $user) }}'" class="btn btn-danger">Заблокувати користувача</button>
+                    @if(Auth::user()->id != $user->id && Auth::user()->role_id == 3)
+                        @if($user->ban_expiration && \Carbon\Carbon::parse($user->ban_expiration)->isFuture())
+                            <button onclick="window.location.href='{{ route('admin.unban-user', $user) }}'" class="btn btn-success">Розблокувати користувача</button>
+                        @else
+                            <button onclick="window.location.href='{{ route('admin.ban-form', $user) }}'" class="btn btn-danger">Заблокувати користувача</button>
                         @endif
-                        @endif
+                    @endif
+                @endif
             </div>
         </div>
     </div>

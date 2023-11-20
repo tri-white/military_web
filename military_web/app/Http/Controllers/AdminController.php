@@ -112,38 +112,25 @@ class AdminController extends Controller
 
     public function processBanForm(Request $request, User $user)
     {
-        // Validate the form data
         $request->validate([
-            'ban_expiration' => 'nullable|date',
-            'delete_propositions' => 'boolean',
-            'delete_postAsks' => 'boolean',
-            'delete_postBids' => 'boolean',
-            'delete_postMoneys' => 'boolean',
+            'ban_expiration' => 'required|date_format:Y-m-d\TH:i|after:now',
         ]);
 
-        // Update user ban_expiration
-        $user->update([
-            'ban_expiration' => $request->input('ban_expiration'),
-        ]);
+        $user->ban_expiration = $request->input('ban_expiration');
 
-        // Delete related records if requested
-        if ($request->input('delete_propositions')) {
-            $user->propositions()->delete();
+        $user->save();
+
+        return redirect()->route('profile', ['userid' => $user->id])->with('success', 'Користувача заблоковано.');
+    }
+    public function unbanUser(User $user)
+    {
+        if (!$user->ban_expiration || \Carbon\Carbon::parse($user->ban_expiration)->isPast()) {
+            return redirect()->back()->with('error', 'Користувач не є заблокованим.');
         }
+        $user->ban_expiration = null;
+        $user->save();
 
-        if ($request->input('delete_postAsks')) {
-            $user->postAsks()->delete();
-        }
-
-        if ($request->input('delete_postBids')) {
-            $user->postBids()->delete();
-        }
-
-        if ($request->input('delete_postMoneys')) {
-            $user->postMoneys()->delete();
-        }
-
-        return redirect()->back()->with('success', 'User ban and related records updated successfully.');
+        return redirect()->back()->with('success', 'Користувача розблоковано.');
     }
     
 }

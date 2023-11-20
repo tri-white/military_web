@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
-
+use Carbon\Carbon;
 class CheckBan
 {
     /**
@@ -18,8 +18,12 @@ class CheckBan
     {
         $user = Auth::user();
 
-        if ($user && $user->banned) {
-            return redirect()->back()->with('error','Неможливо виконати цю дію. Вас було заблоковано на платформі.');
+        if ($user && $user->ban_expiration && Carbon::parse($user->ban_expiration)->isPast()) {
+            $user->ban_expiration = null;
+        }
+
+        else if ($user && $user->ban_expiration) {
+            return redirect()->back()->with('error', 'Неможливо виконати цю дію. Вас було заблоковано на платформі.');
         }
 
         return $next($request);
