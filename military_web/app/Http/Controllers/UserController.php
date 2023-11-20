@@ -6,13 +6,15 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Models\PostBid;
 use Carbon\Carbon;
+use App\Models\User;
 class UserController extends Controller
 {
     public function form_postBid(){
         return view('user/form_post-bid');
     }
     public function profile($userid){
-        return redirect()->back();
+        $user = User::find($userid);
+        return view('user/profile')->with('user',$user);
     }
     public function create_postBid(Request $request, $userid)
     {

@@ -116,12 +116,15 @@ class FundraisingPostController extends Controller
         $user = User::find($userid);
         $post = PostMoney::find($postid);
 
-        if($request->has('reason'))
+        if($request->has('reason')){
             Mail::to($user->email)->send(new RemovedFundraising($request->input('reason'), $post));
+        }
         
         $post->delete();
 
-        return redirect()->route('welcome')->with('success','Оголошення вилучено.');
+        $previousUrl = url()->previous();
+    
+        return redirect($previousUrl)->with('success','Оголошення вилучено.');
     }
     public function showRemoveForm($postid, $userid)
     {

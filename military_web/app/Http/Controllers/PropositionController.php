@@ -19,7 +19,9 @@ class PropositionController extends Controller
             Mail::to($user->email)->send(new RemovedProposition($request->input('reason'), $post, $proposition));
         
         $proposition->delete();
-        return redirect()->route('welcome')->with('success','Пропозицію вилучено.');
+        $previousUrl = url()->previous();
+    
+        return redirect($previousUrl)->with('success','Пропозицію вилучено.');
     }
     public function showRemoveForm($propositionid, $userid)
     {

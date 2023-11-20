@@ -168,7 +168,9 @@ class LotPostController extends Controller
 
         $post->delete();
 
-        return redirect()->route('welcome')->with('success','Оголошення вилучено.');
+        $previousUrl = url()->previous();
+    
+        return redirect($previousUrl)->with('success','Оголошення вилучено.');
     }
     public function showRemoveForm($postid, $userid)
     {
