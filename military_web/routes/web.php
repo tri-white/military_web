@@ -74,7 +74,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified', 'checkBan'])->group(function () {
     // Verification (user side)
     Route::get('/verification', [VerificationController::class, 'verificationView'])->name('verification');
     Route::post('/verification/{userid}', [VerificationController::class, 'verificationSave'])->name('verify');
