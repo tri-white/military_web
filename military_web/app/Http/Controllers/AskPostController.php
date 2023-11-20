@@ -144,7 +144,7 @@ class AskPostController extends Controller
         Proposition::where('post_ask_id', $postid)->delete();
         
         if($request->has('reason'))
-            Mail::to($user->email)->send(new RemovedAsk($request->input('reason')));
+            Mail::to($user->email)->send(new RemovedAsk($request->input('reason'), $post));
 
         $post->delete();
         return redirect()->back()->with('success','Оголошення вилучено.');

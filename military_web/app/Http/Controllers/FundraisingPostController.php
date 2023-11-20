@@ -117,7 +117,7 @@ class FundraisingPostController extends Controller
         $post = PostMoney::find($postid);
 
         if($request->has('reason'))
-            Mail::to($user->email)->send(new RemovedFundraising($request->input('reason')));
+            Mail::to($user->email)->send(new RemovedFundraising($request->input('reason'), $post));
         
         $post->delete();
 

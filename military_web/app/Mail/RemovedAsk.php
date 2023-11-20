@@ -17,10 +17,11 @@ class RemovedAsk extends Mailable
     /**
      * Create a new message instance.
      */
-    public $reason;
-    public function __construct($reason)
+    public $reason, $post;
+    public function __construct($reason,$post)
     {
         $this->reason = $reason;
+        $this->post = $post;
     }
 
     /**
@@ -40,7 +41,7 @@ class RemovedAsk extends Mailable
     {
         return new Content(
             view: 'mails/remove/remove-ask',
-            with: ['reason' => $this->reason],
+            with: ['reason' => $this->reason, 'post'=>$this->post],
         );
     }
 

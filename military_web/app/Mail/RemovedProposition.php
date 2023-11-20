@@ -17,10 +17,12 @@ class RemovedProposition extends Mailable
     /**
      * Create a new message instance.
      */
-    public $reason;
-    public function __construct($reason)
+    public $reason, $post, $proposition;
+    public function __construct($reason,$post, $proposition)
     {
         $this->reason = $reason;
+        $this->post = $post;
+        $this->proposition = $proposition;
     }
 
     /**
@@ -40,7 +42,7 @@ class RemovedProposition extends Mailable
     {
         return new Content(
             view: 'mails/remove/remove-proposition',
-            with: ['reason' => $this->reason],
+            with: ['reason' => $this->reason, 'post'=>$this->post, 'proposition'=>$this->proposition],
         );
     }
 

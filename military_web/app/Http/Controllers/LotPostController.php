@@ -163,7 +163,7 @@ class LotPostController extends Controller
         Bid::where('post_id', $postid)->delete();
         
         if($request->has('reason'))
-            Mail::to($user->email)->send(new RemovedLot($request->input('reason')));
+            Mail::to($user->email)->send(new RemovedLot($request->input('reason'), $post));
         
 
         $post->delete();
