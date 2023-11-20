@@ -130,4 +130,8 @@ Route::middleware(['auth', 'verified', 'checkBan'])->group(function () {
     Route::get('/remove-fundraising-form/{postid}/{userid}', [FundraisingPostController::class, 'showRemoveForm'])->name('remove-fundraising-form');
     
 
+    Route::get('/admin/users/{user}/ban-form', [AdminController::class, 'showBanForm'])->name('admin.ban-form');
+    Route::post('/admin/users/{user}/process-ban-form', [AdminController::class, 'processBanForm'])->name('admin.process-ban-form');
+
+
 });

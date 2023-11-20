@@ -105,5 +105,45 @@ class AdminController extends Controller
         }
     }
     
+    public function showBanForm(User $user)
+    {
+        return view('manager/ban-form', compact('user'));
+    }
+
+    public function processBanForm(Request $request, User $user)
+    {
+        // Validate the form data
+        $request->validate([
+            'ban_expiration' => 'nullable|date',
+            'delete_propositions' => 'boolean',
+            'delete_postAsks' => 'boolean',
+            'delete_postBids' => 'boolean',
+            'delete_postMoneys' => 'boolean',
+        ]);
+
+        // Update user ban_expiration
+        $user->update([
+            'ban_expiration' => $request->input('ban_expiration'),
+        ]);
+
+        // Delete related records if requested
+        if ($request->input('delete_propositions')) {
+            $user->propositions()->delete();
+        }
+
+        if ($request->input('delete_postAsks')) {
+            $user->postAsks()->delete();
+        }
+
+        if ($request->input('delete_postBids')) {
+            $user->postBids()->delete();
+        }
+
+        if ($request->input('delete_postMoneys')) {
+            $user->postMoneys()->delete();
+        }
+
+        return redirect()->back()->with('success', 'User ban and related records updated successfully.');
+    }
     
 }
