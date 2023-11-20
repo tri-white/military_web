@@ -158,8 +158,8 @@ class LotPostController extends Controller
         $user = User::find($userid);
         $post = PostBid::find($postid);
 
-         // Remove all bids related to the post
         Bid::where('post_id', $postid)->delete();
+        
         //mail to user
         $post->delete();
 

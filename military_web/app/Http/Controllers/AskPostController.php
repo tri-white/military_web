@@ -139,8 +139,8 @@ class AskPostController extends Controller
         $user = User::find($userid);
         $post = PostAsk::find($postid);
 
-           // Remove all bids related to the post
-           Proposition::where('post_ask_id', $postid)->delete();
+        Proposition::where('post_ask_id', $postid)->delete();
+        
         //
         $post->delete();
         return redirect()->back()->with('success','Оголошення вилучено.');
