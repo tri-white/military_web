@@ -17,6 +17,22 @@
                         </div>
                         <div class="col-6">
                             <div class="card-body">
+                            @if(Auth::check())
+                    @if(Auth::user()->role_id==3 || Auth::user()->id==$postBid->user_id)
+                    <div class="d-flex justify-content-end">
+                        <a href="{{ route('edit-lot', ['postid' => $postBid->id]) }}" class="text-dark me-4">
+                            <i class="fas fa-edit"></i> Редагувати
+                        </a>
+                         <!-- Delete Form -->
+                         <form action="{{ route('remove-lot', ['postid' => $postBid->id]) }}" method="POST" onsubmit="return confirm('Ви впевнені, що хочете видалити цей запис?');">
+                                    @csrf
+                                    <button type="submit" class="text-danger" style="background: none; border: none; cursor: pointer;">
+                                        <i class="fas fa-trash-alt"></i> Видалити
+                                    </button>
+                        </form>
+                    </div>
+                    @endif
+                @endif
                                 <h5 class="mx-0 px-0 card-title" style="font-size:24px;">
                                     {{ $postBid->header }}
                                 </h5>

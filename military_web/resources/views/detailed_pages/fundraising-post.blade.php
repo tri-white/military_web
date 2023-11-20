@@ -15,6 +15,23 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
+                @if(Auth::check())
+                    @if(Auth::user()->role_id==3 || Auth::user()->id==$fundraisingPost->user_id)
+                    <div class="d-flex justify-content-end">
+                        <a href="{{ route('edit-fund', ['postid' => $fundraisingPost->id]) }}" class="text-dark me-4">
+                            <i class="fas fa-edit"></i> Редагувати
+                        </a>
+                         <!-- Delete Form -->
+                         <form action="{{ route('remove-fund', ['postid' => $fundraisingPost->id]) }}" method="POST" onsubmit="return confirm('Ви впевнені, що хочете видалити цей запис?');">
+                                    @csrf
+                                    <button type="submit" class="text-danger" style="background: none; border: none; cursor: pointer;">
+                                        <i class="fas fa-trash-alt"></i> Видалити
+                                    </button>
+                        </form>
+                    </div>
+                    
+                    @endif
+                @endif
                     <h1 class="card-title fs-3 text-justify">{{ $fundraisingPost->purpose }}</h1>
                     <p class="card-text">Вже зібрано: {{ $fundraisingPost->current_amount }} / {{ $fundraisingPost->goal_amount }} грн.</p>
 

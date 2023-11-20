@@ -10,6 +10,7 @@ use App\Http\Controllers\FundraisingPostController;
 use App\Http\Controllers\LotPostController;
 use App\Http\Controllers\AskPostController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use App\Http\Controllers\PropositionController;
 
 
 Route::get('/', function () {
@@ -109,6 +110,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/get-free-lot/{postid}/{userid}', [LotPostController::class, 'getFreeLot'])->name('get-free-lot');
     Route::post('/accept-proposition/{propositionid}', [AskPostController::class, 'acceptProposition'])->name('accept-proposition');
 
+
+    Route::get('/fundraising/edit/{postid}', [FundraisingPostController::class, 'edit'])->name('edit-fund');
+    Route::post('/fundraising/remove/{postid}', [FundraisingPostController::class, 'remove'])->name('remove-fund');
+
+    Route::get('/ask/edit/{postid}', [AskPostController::class, 'edit'])->name('edit-ask');
+    Route::post('/ask/remove/{postid}', [AskPostController::class, 'remove'])->name('remove-ask');
+
+    Route::get('/lot/edit/{postid}', [LotPostController::class, 'edit'])->name('edit-lot');
+    Route::post('/lot/remove/{postid}', [LotPostController::class, 'remove'])->name('remove-lot');
+
+    Route::get('/proposition/edit/{propositionid}', [PropositionController::class, 'edit'])->name('edit-proposition');
+    Route::post('/proposition/remove/{propositionid}', [PropositionController::class, 'remove'])->name('remove-proposition');
 
 
 });
