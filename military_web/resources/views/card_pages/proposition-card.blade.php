@@ -15,7 +15,7 @@
                             </button>
                         </form>
                         @else
-                        <button type="button" class="text-danger" onclick="location.href='{{ route('remove-proposition-form', ['postid' => $postBid->id, 'userid' => Auth::user()->id]) }}'">
+                        <button type="button" class="text-danger" onclick="location.href='{{ route('remove-proposition-form', ['propositionid' => $proposition->id, 'userid' => Auth::user()->id]) }}'">
                             <i class="fas fa-trash-alt"></i> Видалити
                         </button>
                         @endif

@@ -23,16 +23,16 @@
                         </a>
                         <!-- Delete Form -->
                         @if(Auth::user()->id==$postAsk->user_id)
-                        <form action="{{ route('remove-ask', ['postid' => $postAsk->id, 'userid'=>Auth::user()->id]) }}" method="POST" onsubmit="return confirm('Ви впевнені, що хочете видалити цей запис?');">
-                            @csrf
-                            <button type="submit" class="text-danger" style="background: none; border: none; cursor: pointer;">
+                            <form action="{{ route('remove-ask', ['postid' => $postAsk->id, 'userid'=>Auth::user()->id]) }}" method="POST" onsubmit="return confirm('Ви впевнені, що хочете видалити цей запис?');">
+                                @csrf
+                                <button type="submit" class="text-danger" style="background: none; border: none; cursor: pointer;">
+                                    <i class="fas fa-trash-alt"></i> Видалити
+                                </button>
+                            </form>
+                        @else
+                            <button type="button" class="text-danger" onclick="location.href='{{ route('remove-ask-form', ['postid' => $postAsk->id, 'userid' => Auth::user()->id]) }}'">
                                 <i class="fas fa-trash-alt"></i> Видалити
                             </button>
-                        </form>
-                        @else
-                        <button type="button" class="text-danger" onclick="location.href='{{ route('remove-ask-form', ['postid' => $postAsk->id, 'userid' => Auth::user()->id]) }}'">
-                            <i class="fas fa-trash-alt"></i> Видалити
-                        </button>
                         @endif
                     </div>
                     @endif
