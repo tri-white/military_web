@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\PostMoney;
 use App\Models\Category;
-
+use App\Models\User;
 class FundraisingPostController extends Controller
 {
     public function index($page,$searchKey, $category, $sort){
