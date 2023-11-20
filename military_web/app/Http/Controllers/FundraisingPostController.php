@@ -73,7 +73,7 @@ class FundraisingPostController extends Controller
     }
     public function showPost($postid)
     {
-        $fundraisingPost = PostMoney::findOrFail($postid);
+        $fundraisingPost = PostMoney::find($postid);
         if (!$fundraisingPost) {
             return redirect()->route('welcome')->with('error', 'Оголошення не знайдено');
         }
