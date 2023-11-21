@@ -109,6 +109,7 @@
     @endif
 
     <!-- List of propositions -->
+    @if($propositionCount!=0)
 <div class="row">
 <h5 class="text-white fs-3 my-4 text-center">Пропозиції</h5>
             <ul>
@@ -117,6 +118,7 @@
                 @endforeach
             </ul>
 </div>
+@endif
   
 </div>
 

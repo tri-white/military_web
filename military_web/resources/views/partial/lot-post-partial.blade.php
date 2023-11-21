@@ -15,7 +15,7 @@
             {{ \Carbon\Carbon::now()->diffForHumans(\Carbon\Carbon::parse($postBid->expiration_datetime), true) }}
         </p>
         @if ($latestBid && $latestBid->user_id == Auth::id())
-                <p class="text-danger d-flex justify-content-center align-items-center">Це ваша ставка!</p>
+                <p class="text-danger d-flex justify-content-center">Це ваша ставка!</p>
             @endif
     </div>
 @else

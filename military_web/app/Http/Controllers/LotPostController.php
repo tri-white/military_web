@@ -43,13 +43,13 @@ class LotPostController extends Controller
         } elseif ($sort === 'header-asc') {
             $query->orderBy('header', 'desc');
         } elseif ($sort === 'bid-desc') {
-            $query->orderBy('current_bid', 'asc');
-        } elseif ($sort === 'bid-asc') {
             $query->orderBy('current_bid', 'desc');
+        } elseif ($sort === 'bid-asc') {
+            $query->orderBy('current_bid', 'asc');
         } elseif ($sort === 'time-desc') {
-            $query->orderBy('expiration_datetime', 'asc');
-        } elseif ($sort === 'time-asc') {
             $query->orderBy('expiration_datetime', 'desc');
+        } elseif ($sort === 'time-asc') {
+            $query->orderBy('expiration_datetime', 'asc');
         }
 
         $lotPosts = $query->get();
