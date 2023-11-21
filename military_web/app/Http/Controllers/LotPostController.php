@@ -10,6 +10,7 @@ use App\Models\Category;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\LotWon;
 use App\Mail\LotWinnerNotification;
+use App\Mail\LotExpired;
 use App\Mail\ChangedLot;
 use App\Mail\RemovedLot;
 use Illuminate\Support\Facades\Auth;
@@ -20,6 +21,8 @@ class LotPostController extends Controller
         $page = (int)$page;
 
         $categories= Category::all();
+
+        $this->removeExpiredLots();
            
         $query = PostBid::query();
 
@@ -65,6 +68,28 @@ class LotPostController extends Controller
             'selectedCategory' => $category,
             'selectedSort' => $sort,
         ]);
+    }
+    public function removeExpiredLots(){
+        $expiredAuctions = PostBid::where('expiration_datetime', '<', now())->get();
+
+        foreach ($expiredAuctions as $post) {
+            $author = User::find($post->user_id);
+
+            $userBid = Bid::where('post_id', $post->id)->orderBy('bid_amount', 'desc')->first();
+            if(!is_null($userBid)){
+                $user = User::find($userBid->user_id);
+
+                Mail::to($user->email)->send(new LotWinnerNotification($user->id, $post->id, $author->id));
+                Mail::to($author->email)->send(new LotWon($user->id, $post->id, $author->id));
+            }
+            else if (!is_null($author)){
+                Mail::to($author->email)->send(new LotExpired($post, $author));
+            }
+            $post->bids()->delete();
+            $post->delete();
+
+        }
+        return;
     }
     public function showPost($postid){
         $postBid = PostBid::find($postid);

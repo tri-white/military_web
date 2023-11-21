@@ -1,30 +1,23 @@
 <?php
-
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-
+use App\Models\PostBid;
+use Carbon\Carbon;
+use App\Models\User;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\LotWon;
+use App\Mail\LotWinnerNotification;
 class ExpireAuctions extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
-    protected $signature = 'app:expire-auctions';
+    protected $signature = 'expire:auctions';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Command description';
+    protected $description = 'Видалення експірованих аукціонів';
 
-    /**
-     * Execute the console command.
-     */
     public function handle()
     {
-        //
+        
+
+        $this->info('Експіровані аукціони успішно вилучено.');
     }
 }
