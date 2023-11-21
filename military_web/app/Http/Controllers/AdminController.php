@@ -11,12 +11,18 @@ use Mail;
 use DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
+use App\Models\Payment;
 class AdminController extends Controller
 {
     public function viewVerificationRequests()
     {
         $verificationRequests = RequestForRole::orderBy('created_at', 'desc')->get();
         return view('manager/verification-requests', compact('verificationRequests'));
+    }
+    public function viewPayments()
+    {
+        $payments = Payment::orderBy('created_at', 'desc')->get();   
+        return view('manager/payments', compact('payments'));
     }
     function getEnumValues($table, $field)
     {

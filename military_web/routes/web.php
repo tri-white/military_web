@@ -86,6 +86,8 @@ Route::middleware(['auth', 'verified', 'checkBan'])->group(function () {
     Route::post('/verification-request/{id}/disapprove', [AdminController::class, 'disapproveVerification'])->name('disapprove-verification');
     Route::post('/verification-request/{id}/waiting', [AdminController::class, 'verificationToWaiting'])->name('verification-to-waiting');
     Route::post('/verification-request/{id}/remove', [AdminController::class, 'removeVerification'])->name('remove-verification');
+    
+    Route::get('/payments', [AdminController::class, 'viewPayments'])->name('payments');
 
     
     // Post ask for equipment (soldier side)
