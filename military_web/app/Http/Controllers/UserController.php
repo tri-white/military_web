@@ -40,7 +40,7 @@ class UserController extends Controller
         $listing->category_id = $request->input('category_id');
         $listing->save();
 
-        return redirect()->route('welcome')->with('success', 'Лот успішно створено. Вам надійде лист при його завершенні');
+        return redirect()->route('lot-post',['postid' => $listing->id])->with('success', 'Лот успішно створено. Вам надійде лист при його завершенні');
     }
     public function create_postBidFree(Request $request, $userid)
     {
@@ -62,6 +62,6 @@ class UserController extends Controller
         $listing->expiration_datetime = $request->input('expiration_datetime');
         $listing->category_id = $request->input('category_id');
         $listing->save();
-        return redirect()->route('welcome')->with('success', 'Лот успішно створено. Вам надійде лист при його завершенні');
+        return redirect()->route('lot-post',['postid' => $listing->id])->with('success', 'Лот успішно створено. Вам надійде лист при його завершенні');
     }
 }

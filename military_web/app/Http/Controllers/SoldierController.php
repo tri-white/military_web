@@ -32,7 +32,7 @@ class SoldierController extends Controller
     
         $post->save();
     
-        return redirect()->route('welcome')->with('success', 'Успішно створено оголошення');
+        return redirect()->route('ask-post',['postid' => $post->id])->with('success', 'Успішно створено оголошення');
     }
 
 
@@ -60,7 +60,7 @@ class SoldierController extends Controller
         $post->category_id = $request->input('category_id');
         $post->save();
 
-        return redirect()->route('welcome')->with('success', 'Успішно створено оголошення про збір коштів');
+        return redirect()->route('fundraising-post',['postid' => $post->id])->with('success', 'Успішно створено оголошення про збір коштів');
     }
 
 }
