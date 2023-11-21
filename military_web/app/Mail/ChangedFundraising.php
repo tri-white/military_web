@@ -17,11 +17,12 @@ class ChangedFundraising extends Mailable
     /**
      * Create a new message instance.
      */
-    public $reason;
-    public function __construct($reason)
+    public $post;
+    public function __construct($post)
     {
-        $this->reason = $reason;
+        $this->post = $post;
     }
+
 
     /**
      * Get the message envelope.
@@ -40,7 +41,7 @@ class ChangedFundraising extends Mailable
     {
         return new Content(
             view: 'mails/edit/edit-fundraising',
-            with: ['reason' => $this->reason],
+            with: ['post' => $this->post],
         );
     }
 

@@ -14,11 +14,12 @@ class ChangedProposition extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $reason;
-    public function __construct($reason)
+    public $proposition;
+    public function __construct($proposition)
     {
-        $this->reason = $reason;
+        $this->proposition = $proposition;
     }
+
 
     /**
      * Get the message envelope.
@@ -38,7 +39,7 @@ class ChangedProposition extends Mailable
     {
         return new Content(
             view: 'mails/edit/edit-proposition',
-            with: ['reason' => $this->reason],
+            with: ['proposition' => $this->proposition],
         );
     }
 

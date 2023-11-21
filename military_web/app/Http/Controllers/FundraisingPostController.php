@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\PostMoney;
 use App\Models\Category;
 use App\Models\User;
-use App\Mail\ChangedFundraising;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\ChangedFundraising;
 use App\Mail\RemovedFundraising;
 class FundraisingPostController extends Controller
 {
@@ -144,7 +144,7 @@ class FundraisingPostController extends Controller
             'goal_amount' => 'required|numeric|min:0',
             'category_id' => 'required|exists:category,id',
         ]);
-    
+        $user = User::findOrFail($userid);
         $fundraisingPost = PostMoney::findOrFail($postid);
     
         $fundraisingPost->purpose = $request->input('purpose');
@@ -152,6 +152,9 @@ class FundraisingPostController extends Controller
         $fundraisingPost->category_id = $request->input('category_id');
     
         $fundraisingPost->save();
+
+        if($user->id != $fundraisingPost->user_id)
+            Mail::to($user->email)->send(new ChangedFundraising($fundraisingPost));
     
         return redirect()->route('fundraising-post',['postid' => $fundraisingPost->id])->with('success', 'Збір коштів успішно оновлено.');
     }

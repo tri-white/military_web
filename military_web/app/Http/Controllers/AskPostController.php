@@ -171,7 +171,7 @@ class AskPostController extends Controller
             'photo' => 'image|mimes:jpg,jpeg,png|max:2048',
             'category_id' => 'required|exists:category,id',
         ]);
-
+        $user= User::findOrFail($userid);
         $listing = PostAsk::findOrFail($postid); // Updated to use PostAsk model
 
         $listing->header = $request->input('header');
@@ -185,6 +185,8 @@ class AskPostController extends Controller
         $listing->category_id = $request->input('category_id');
 
         $listing->save();
+        if($user->id != $listing->user_id)
+            Mail::to($user->email)->send(new ChangedAsk($listing));
 
         return redirect()->route('ask-post',['postid' => $listing->id])->with('success', 'Оголошення успішно оновлено.');
     }

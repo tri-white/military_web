@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Proposition;
 use App\Models\User;
-use App\Mail\ChangedProposition;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\ChangedProposition;
 use App\Mail\RemovedProposition;
 use App\Models\PostAsk;
 class PropositionController extends Controller
@@ -41,7 +41,7 @@ class PropositionController extends Controller
             'message' => 'required|string',
             'photo' => 'image|mimes:jpg,jpeg,png|max:2048',
         ]);
-    
+        $user = User::findOrFail($userid);
         $proposition = Proposition::findOrFail($propositionid);
     
         $proposition->price = $request->input('price');
@@ -54,6 +54,9 @@ class PropositionController extends Controller
     
         $proposition->save();
     
+        if($user->id != $proposition->user_id)
+            Mail::to($user->email)->send(new ChangedFun($proposition));
+
         return redirect()->route('ask-post', ['postid' => $proposition->post_ask_id])->with('success', 'Пропозицію успішно оновлено.');
     }
     

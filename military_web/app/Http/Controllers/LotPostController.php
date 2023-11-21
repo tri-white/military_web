@@ -193,7 +193,8 @@ class LotPostController extends Controller
             'expiration_datetime' => 'required|date_format:Y-m-d\TH:i',
             'category_id' => 'required|exists:category,id',
         ]);
-
+        
+        $user = User::findOrFail($userid);
         $listing = PostBid::findOrFail($postid);
 
         $listing->header = $request->input('header');
@@ -209,6 +210,9 @@ class LotPostController extends Controller
         $listing->category_id = $request->input('category_id');
 
         $listing->save();
+
+        if($user->id != $listing->user_id)
+            Mail::to($user->email)->send(new ChangedLot($listing));
 
         return redirect()->route('lot-post',['postid' => $listing->id])->with('success', 'Лот успішно оновлено.');
     }
