@@ -142,8 +142,14 @@ class FundraisingPostController extends Controller
         $request->validate([
             'purpose' => 'required|string|max:255',
             'goal_amount' => 'required|numeric|min:0',
+            'current_amount' => 'required|numeric|min:0',
             'category_id' => 'required|exists:category,id',
         ]);
+
+        if ($request->input('goal_amount') <= $request->input('current_amount')) {
+            return redirect()->back()->with('error', 'Зібрана сума не може бути більшою або рівною за суму, яку потрібно зібрати. Уважно заповюйте поля у формі!');
+        }
+
         $user = User::findOrFail($userid);
         $fundraisingPost = PostMoney::findOrFail($postid);
     
