@@ -15,6 +15,12 @@
                 </div>
 
                 <div class="form-group">
+                    
+                    <label for="bank_card_number">Номер банківської картки на яку будуть зараховуватися кошти:</label>
+                    <input type="tel" class="form-control" id="bank_card_number" name="bank_card_number" value="{{ old('bank_card_number') }}" inputmode="numeric" pattern="[0-9\s]{13,19}" autocomplete="cc-number" maxlength="19" placeholder="xxxx xxxx xxxx xxxx" required>
+                </div>
+
+                <div class="form-group">
                     <label for="goal_amount">Сума, яку необхідно зібрати (грн):</label>
                     <input type="number" class="form-control" id="goal_amount" name="goal_amount" value="{{ old('goal_amount') }}" required>
                 </div>

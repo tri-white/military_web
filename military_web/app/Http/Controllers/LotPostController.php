@@ -109,10 +109,13 @@ class LotPostController extends Controller
     }
     public function getFreeLot(Request $request, $postid, $userid)
     {
-        $postBid = PostBid::findOrFail($postid);
+        $postBid = PostBid::find($postid);
         $author = User::find($postBid->user_id);
         $user= User::find($userid);
     
+        if(!$postBid){
+            return redirect()->route('welcome')->with('error','Аукціону більше не існує');
+        }
     
         Mail::to(Auth::user()->email)->send(new LotWinnerNotification($userid, $postid, $author->id));
     

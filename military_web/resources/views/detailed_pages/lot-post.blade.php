@@ -42,8 +42,12 @@
                                 <h5 class="mx-0 px-0 card-title" style="font-size:24px;">
                                     {{ $postBid->header }}
                                 </h5>
+                                @if(!is_null($postBid->current_bid))
                                 <div id="live-update-container">
                                 </div>
+                                @else
+            <p class="card-text text-success d-flex justify-content-center align-items-center h-50" style="font-size:32px;">Цей лот безкоштовний!</p>
+            @endif
 
                             </div>
                         </div>

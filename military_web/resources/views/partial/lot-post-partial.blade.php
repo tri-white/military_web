@@ -1,14 +1,13 @@
 @if (!$finished)
     <div class="row ms-3 text-center h-100 d-flex justify-content-center" style="font-size:32px;">
-        @if ($postBid->current_bid > 0)
+        @if (!is_null($postBid->current_bid))
             @php
                 $latestBid = App\Models\Bid::where('post_id', $postBid->id)
                     ->orderByDesc('created_at')
                     ->first();
             @endphp
             <p class="d-flex justify-content-center align-items-center">Поточна ставка: {{ $postBid->current_bid }} грн.</p>
-        @else
-            <p class="card-text text-success d-flex justify-content-center align-items-center h-50">Цей лот безкоштовний!</p>
+
         @endif
         
         <p class="text-center fs-5 mt-0">

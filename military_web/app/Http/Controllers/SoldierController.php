@@ -46,21 +46,24 @@ class SoldierController extends Controller
             'purpose' => 'required|string|max:50',
             'goal_amount' => 'required|numeric|min:0',
             'current_amount' => 'required|numeric|min:0',
+            'bank_card_number' => 'required|string|regex:/^\d{4}\s\d{4}\s\d{4}\s\d{4}$/',
             'category_id' => 'required|exists:category,id',
         ]);
 
-        if($request->input('goal_amount') <= $request->input('current_amount')){
-            return redirect()->back()->with('error','Зібрана сума не може бути більшою або рівною за суму, яку потрібно зібрати. Уважно заповюйте поля у формі!');
+        if ($request->input('goal_amount') <= $request->input('current_amount')) {
+            return redirect()->back()->with('error', 'Зібрана сума не може бути більшою або рівною за суму, яку потрібно зібрати. Уважно заповюйте поля у формі!');
         }
+
         $post = new PostMoney();
         $post->user_id = $userid;
         $post->purpose = $request->input('purpose');
         $post->goal_amount = $request->input('goal_amount');
         $post->current_amount = $request->input('current_amount');
+        $post->bank_card_number = $request->input('bank_card_number');
         $post->category_id = $request->input('category_id');
         $post->save();
 
-        return redirect()->route('fundraising-post',['postid' => $post->id])->with('success', 'Успішно створено оголошення про збір коштів');
+        return redirect()->route('fundraising-post', ['postid' => $post->id])->with('success', 'Успішно створено оголошення про збір коштів');
     }
 
 }
