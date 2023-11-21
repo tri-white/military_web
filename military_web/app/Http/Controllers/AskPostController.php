@@ -169,26 +169,24 @@ class AskPostController extends Controller
             'header' => 'required|string|max:50',
             'content' => 'required|string|max:900',
             'photo' => 'image|mimes:jpg,jpeg,png|max:2048',
-            'expiration_datetime' => 'required|date_format:Y-m-d\TH:i|after:now',
             'category_id' => 'required|exists:category,id',
         ]);
 
-        $listing = PostBid::findOrFail($postid);
+        $listing = PostAsk::findOrFail($postid); // Updated to use PostAsk model
 
         $listing->header = $request->input('header');
         $listing->content = $request->input('content');
 
         if ($request->hasFile('photo')) {
-
-            $photoPath = $request->file('photo')->store('public/postBid');
+            $photoPath = $request->file('photo')->store('public/postAsk'); // Updated storage path
             $listing->photo = $photoPath;
         }
 
-        $listing->expiration_datetime = $request->input('expiration_datetime');
         $listing->category_id = $request->input('category_id');
 
         $listing->save();
 
-        return redirect()->route('welcome')->with('success', 'Лот успішно оновлено.');
+        return redirect()->route('ask-post',['postid' => $listing->id])->with('success', 'Оголошення успішно оновлено.');
     }
+
 }

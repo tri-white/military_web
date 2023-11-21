@@ -190,7 +190,7 @@ class LotPostController extends Controller
             'header' => 'required|string|max:50',
             'content' => 'required|string|max:900',
             'photo' => 'image|mimes:jpg,jpeg,png|max:2048',
-            'expiration_datetime' => 'required|date_format:Y-m-d\TH:i|after:now',
+            'expiration_datetime' => 'required|date_format:Y-m-d\TH:i',
             'category_id' => 'required|exists:category,id',
         ]);
 
@@ -210,6 +210,6 @@ class LotPostController extends Controller
 
         $listing->save();
 
-        return redirect()->route('welcome')->with('success', 'Лот успішно оновлено.');
+        return redirect()->route('lot-post',['postid' => $listing->id])->with('success', 'Лот успішно оновлено.');
     }
 }

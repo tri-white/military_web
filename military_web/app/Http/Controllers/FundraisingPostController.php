@@ -153,6 +153,6 @@ class FundraisingPostController extends Controller
     
         $fundraisingPost->save();
     
-        return redirect()->route('welcome')->with('success', 'Збір коштів успішно оновлено.');
+        return redirect()->route('fundraising-post',['postid' => $fundraisingPost->id])->with('success', 'Збір коштів успішно оновлено.');
     }
 }
