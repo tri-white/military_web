@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ChangedFundraising;
 use App\Mail\RemovedFundraising;
+use App\Mail\FinishedFundraising;
 class FundraisingPostController extends Controller
 {
     public function index($page,$searchKey, $category, $sort){
@@ -83,9 +84,9 @@ class FundraisingPostController extends Controller
     public function donate($postid, Request $request)
     {
         $fundraisingPost = PostMoney::findOrFail($postid);
-        
+        $user = User::find($fundraisingPost->user_id);
         $request->validate([
-            'donationAmount' => 'required|numeric|min:1',
+            'donationAmount' => 'required|numeric|min:10',
         ]);
 
         $donationAmount = $request->input('donationAmount');
@@ -93,7 +94,11 @@ class FundraisingPostController extends Controller
         $fundraisingPost->current_amount += $donationAmount;
         $fundraisingPost->save();
 
-        return redirect()->back()->with('success', 'Donation successful.');
+        if($fundraisingPost->goal_amount <= $fundraisingPost->current_amount){
+            Mail::to($user->email)->send(new FinishedFundraising($fundraisingPost));
+            $fundraisingPost->delete();
+        }
+        return redirect()->back()->with('success', 'Операцію проведено успішно.');
     }
     public function search(Request $request)
     {
