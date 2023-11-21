@@ -55,7 +55,7 @@ class PropositionController extends Controller
         $proposition->save();
     
         if($user->id != $proposition->user_id)
-            Mail::to($user->email)->send(new ChangedFun($proposition));
+            Mail::to($user->email)->send(new ChangedProposition($proposition));
 
         return redirect()->route('ask-post', ['postid' => $proposition->post_ask_id])->with('success', 'Пропозицію успішно оновлено.');
     }
