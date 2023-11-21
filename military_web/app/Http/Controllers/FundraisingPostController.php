@@ -155,5 +155,4 @@ class FundraisingPostController extends Controller
     
         return redirect()->route('welcome')->with('success', 'Збір коштів успішно оновлено.');
     }
-    
 }

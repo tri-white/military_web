@@ -31,36 +31,30 @@ class PropositionController extends Controller
     {
         $proposition = Proposition::find($propositionid);
 
-        return view('edit/proposition-edit', compact('post'));
+        return view('edit/proposition-edit', compact('proposition'));
     }
     
     public function editProposition(Request $request, $userid, $propositionid)
     {
         $request->validate([
-            'header' => 'required|string|max:50',
-            'content' => 'required|string|max:900',
+            'price' => 'required|numeric|min:0',
+            'message' => 'required|string',
             'photo' => 'image|mimes:jpg,jpeg,png|max:2048',
-            'expiration_datetime' => 'required|date_format:Y-m-d\TH:i|after:now',
-            'category_id' => 'required|exists:category,id',
         ]);
-
-        $listing = PostBid::findOrFail($postid);
-
-        $listing->header = $request->input('header');
-        $listing->content = $request->input('content');
-
+    
+        $proposition = Proposition::findOrFail($propositionid);
+    
+        $proposition->price = $request->input('price');
+        $proposition->message = $request->input('message');
+    
         if ($request->hasFile('photo')) {
-
-            $photoPath = $request->file('photo')->store('public/postBid');
-            $listing->photo = $photoPath;
+            $photoPath = $request->file('photo')->store('public/propositions');
+            $proposition->photo = $photoPath;
         }
-
-        $listing->expiration_datetime = $request->input('expiration_datetime');
-        $listing->category_id = $request->input('category_id');
-
-        $listing->save();
-
-        // return to post-ask
-        return redirect()->route('welcome')->with('success', 'Пропозицію успішно оновлено.');
+    
+        $proposition->save();
+    
+        return redirect()->route('ask-post', ['postid' => $proposition->post_ask_id])->with('success', 'Пропозицію успішно оновлено.');
     }
+    
 }
