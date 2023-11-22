@@ -4,7 +4,7 @@
     <div class="container text-center text-white">
         <h1>Заява на верифікацію</h1>
         
-        <img src="{{ asset('storage/'.$request->ticket_photo) }}" alt="Verification Photo" style="max-width: 300px; margin: 0 auto;">
+        <img src="{{ $request->ticket_photo ? asset('storage/app/public/' . $request->ticket_photo) : asset('no-image.jpg') }}" alt="Verification Photo" style="max-width: 300px; margin: 0 auto;">
 
         @php
             $user = App\Models\User::where('id', $request->user_id)->first();
@@ -42,7 +42,7 @@
     </div>
 
     <div class="container text-center mb-3">
-        <a href="{{ asset('storage/'.$request->ticket_photo) }}" download="{{ $user->email }}_verification.jpg" class="btn btn-primary">
+        <a href="{{ asset('storage/app/public/'.$request->ticket_photo) }}" download="{{ $user->email }}_verification.jpg" class="btn btn-primary">
             <i class="fas fa-download"></i> завантажити картинку
         </a>
     </div>

@@ -9,7 +9,7 @@
         <div class="card mb-4">
             <div class="row g-0" style="height:200px;">
                 <div class="col-3" style="height:200px; width:200px;">
-                    <img src="{{ $postAsk->photo ? asset('/storage/app/' . $postAsk->photo) : asset('no-image.jpg') }}"
+                    <img src="{{ $postAsk->photo ? asset('storage/app/' . $postAsk->photo) : asset('no-image.jpg') }}"
                         class="card-img-top" alt="Listing Photo" style="height:100%;">
                 </div>
                 <div class="col-9">

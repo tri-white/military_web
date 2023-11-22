@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aa1c1c233cdb8c9e110d850f4233d8a5",
+    "content-hash": "92d075fe06bf14923f9fcd8cc7f4a379",
     "packages": [
         {
             "name": "brick/math",
@@ -1316,16 +1316,16 @@
         },
         {
             "name": "laravel/cashier",
-            "version": "v14.12.12",
+            "version": "v14.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/cashier-stripe.git",
-                "reference": "77e2f5625caffed598819b10ed08374ddeefb3ad"
+                "reference": "46d8139cc4c4a53c70a56cbc8605c4503a429f4c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/cashier-stripe/zipball/77e2f5625caffed598819b10ed08374ddeefb3ad",
-                "reference": "77e2f5625caffed598819b10ed08374ddeefb3ad",
+                "url": "https://api.github.com/repos/laravel/cashier-stripe/zipball/46d8139cc4c4a53c70a56cbc8605c4503a429f4c",
+                "reference": "46d8139cc4c4a53c70a56cbc8605c4503a429f4c",
                 "shasum": ""
             },
             "require": {
@@ -1399,7 +1399,7 @@
                 "issues": "https://github.com/laravel/cashier/issues",
                 "source": "https://github.com/laravel/cashier"
             },
-            "time": "2023-11-02T13:50:24+00:00"
+            "time": "2023-11-21T15:08:38+00:00"
         },
         {
             "name": "laravel/cashier-paddle",
