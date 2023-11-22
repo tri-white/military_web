@@ -13,8 +13,8 @@ class SoldierController extends Controller
 
     public function create_postAsk(Request $request, $userid){
         $request->validate([
-            'header' => 'required|string|max:255',
-            'content' => 'required|string',
+            'header' => 'required|string|max:50',
+            'content' => 'required|string|max:500',
             'photo' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
             'category_id' => 'required|exists:category,id',
         ]);

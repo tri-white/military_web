@@ -20,7 +20,7 @@ class UserController extends Controller
     {
         $request->validate([
             'header' => 'required|string|max:50',
-            'content' => 'required|string|max:900',
+            'content' => 'required|string|max:500',
             'photo' => 'image|mimes:jpg,jpeg,png|max:2048',
             'expiration_datetime' => 'required|date_format:Y-m-d\TH:i|after:now',
             'current_bid' => 'required|numeric|min:0',

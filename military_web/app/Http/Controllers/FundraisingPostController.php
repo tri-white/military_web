@@ -6,10 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\PostMoney;
 use App\Models\Category;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ChangedFundraising;
 use App\Mail\RemovedFundraising;
 use App\Mail\FinishedFundraising;
+use App\Mail\FundraisingPayment;
 class FundraisingPostController extends Controller
 {
     public function index($page,$searchKey, $category, $sort){
@@ -85,19 +87,21 @@ class FundraisingPostController extends Controller
     {
         $fundraisingPost = PostMoney::findOrFail($postid);
         $user = User::find($fundraisingPost->user_id);
+        $auth = Auth::user();
         $request->validate([
             'donationAmount' => 'required|numeric|min:10',
         ]);
 
         $donationAmount = $request->input('donationAmount');
 
-        $fundraisingPost->current_amount += $donationAmount;
+        //$fundraisingPost->current_amount += $donationAmount;
         $fundraisingPost->save();
 
         if($fundraisingPost->goal_amount <= $fundraisingPost->current_amount){
             Mail::to($user->email)->send(new FinishedFundraising($fundraisingPost));
             $fundraisingPost->delete();
         }
+        Mail::to($auth->email)->send(new FundraisingPayment($fundraisingPost));
         return redirect()->back()->with('success', 'Операцію проведено успішно.');
     }
     public function search(Request $request)

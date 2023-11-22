@@ -5,7 +5,7 @@
 <div class="card mb-3 col-12">
         <div class="card-body">
             @if ($proposition->photo)
-                <img src="{{ $proposition->photo ? asset(str_replace('public/', 'storage/', $proposition->photo)) : asset('no-image.jpg') }}" alt="Фото пропозиції" class="align-self-center mx-auto text-center d-flex justify-content-center border-1 border-dark" style="width: 300px; height: 300px; object-fit: cover;">
+                <img src="{{ $proposition->photo ? asset('storage/app/public' . $proposition->photo) : asset('no-image.jpg') }}" alt="Фото пропозиції" class="align-self-center mx-auto text-center d-flex justify-content-center border-1 border-dark" style="width: 300px; height: 300px; object-fit: cover;">
              @endif
             <p class="card-text">{{ $proposition->message }}</p>
             <p class="card-text">Вартість: {{ $proposition->price }} грн.</p>
@@ -19,7 +19,7 @@
             <div class="card mb-4">
                 <div class="row g-0">
                     <div class="col-3 p-3" style="height: 400px; width: 400px;">
-                        <img src="{{ $post->photo ? asset(str_replace('public/', 'storage/', $post->photo)) : asset('no-image.jpg') }}" class="card-img-top" alt="Listing Photo" style="width:100%; height:100%;">
+                        <img src="{{ $post->photo ? asset('storage/app/public' . $post->photo) : asset('no-image.jpg') }}" class="card-img-top" alt="Listing Photo" style="width:100%; height:100%;">
                     </div>
                     <div class="col-8">
                         <div class="card-body">

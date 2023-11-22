@@ -39,7 +39,7 @@
                 <small>{{ $proposition->created_at->diffForHumans() }}</small>
             </div>
             @if ($proposition->photo)
-                <img src="{{ $proposition->photo ? asset(str_replace('public/', 'storage/', $proposition->photo)) : asset('no-image.jpg') }}" alt="Фото пропозиції" class="align-self-center mx-auto text-center d-flex justify-content-center border-1 border-dark" style="width: 300px; height: 300px; object-fit: cover;">
+                <img src="{{ $proposition->photo ? asset('storage/app/public' . $proposition->photo) : asset('no-image.jpg') }}" alt="Фото пропозиції" class="align-self-center mx-auto text-center d-flex justify-content-center border-1 border-dark" style="width: 300px; height: 300px; object-fit: cover;">
              @endif
             <p class="card-text">{{ $proposition->message }}</p>
             <p class="card-text">Вартість: {{ $proposition->price }} грн.</p>

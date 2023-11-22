@@ -13,7 +13,7 @@
                 <div class="card mb-4">  
                     <div class="row g-0">
                         <div class="col-3 p-3" style="height: 400px; width: 400px;">
-                            <img src="{{ $post->photo ? asset(str_replace('public/', 'storage/', $post->photo)) : asset('no-image.jpg') }}" class="card-img-top" alt="Listing Photo" style="width:100%; height:100%;">
+                            <img src="{{ $post->photo ? asset('storage/app/public' . $post->photo) : asset('no-image.jpg') }}" class="card-img-top" alt="Listing Photo" style="width:100%; height:100%;">
                         </div>
                         <div class="col-6">
                             <div class="card-body">
