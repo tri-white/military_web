@@ -44,6 +44,8 @@ Route::get('/profile/{userid}', [UserController::class, 'profile'])->name('profi
 
 Route::get('/lot-post-partial/{postid}', [LotPostController::class, 'lotPostPartial'])->name('lot-post-partial');
 
+Route::post('/fundraising-post/{postid}/donate', [FundraisingPostController::class, 'donate'])->name('fundraising-post-donate');
+
 
 Route::middleware(['auth'])->group(function () {
     // user profile/logout
@@ -69,27 +71,38 @@ Route::middleware(['auth'])->group(function () {
     })->middleware(['throttle:6,1'])->name('verification.send');
 
     
-    Route::post('/fundraising-post/{postid}/donate', [FundraisingPostController::class, 'donate'])->name('fundraising-post-donate');
 
 });
 
 
 Route::middleware(['auth', 'verified', 'checkBan'])->group(function () {
-    // Verification (user side)
     Route::get('/verification', [VerificationController::class, 'verificationView'])->name('verification');
     Route::post('/verification/{userid}', [VerificationController::class, 'verificationSave'])->name('verify');
 
-    // Verification (admin side)
-    Route::get('/verification-requests', [AdminController::class, 'viewVerificationRequests'])->name('verification-requests');
-    Route::get('/verification-request/{id}', [AdminController::class, 'viewVerification'])->name('view-verification');
-    Route::post('/verification-request/{id}/approve', [AdminController::class, 'approveVerification'])->name('approve-verification');
-    Route::post('/verification-request/{id}/disapprove', [AdminController::class, 'disapproveVerification'])->name('disapprove-verification');
-    Route::post('/verification-request/{id}/waiting', [AdminController::class, 'verificationToWaiting'])->name('verification-to-waiting');
-    Route::post('/verification-request/{id}/remove', [AdminController::class, 'removeVerification'])->name('remove-verification');
-    
-    Route::get('/payments', [AdminController::class, 'viewPayments'])->name('payments');
+    Route::get('/post-bid/form', [UserController::class, 'form_postBid'])->name('form_post-bid');
+    Route::post('/post-bid/create/{userid}', [UserController::class, 'create_postBid'])->name('create_post-bid');
+    Route::post('/post-bid/createFree/{userid}', [UserController::class, 'create_postBidFree'])->name('create_post-bidFree');
 
-    
+    Route::post('/ask-post/{postid}/{userid}/propose', [AskPostController::class, 'propose'])->name('ask-post-propose');
+
+    Route::get('/lot/edit/{postid}', [LotPostController::class, 'edit'])->name('edit-lot');
+    Route::post('/lot/remove/{postid}/{userid}', [LotPostController::class, 'remove'])->name('remove-lot');
+
+    Route::get('/proposition/edit/{propositionid}', [PropositionController::class, 'edit'])->name('edit-proposition');
+    Route::post('/proposition/remove/{propositionid}/{userid}', [PropositionController::class, 'remove'])->name('remove-proposition');
+
+    Route::get('/remove-lot-form/{postid}/{userid}', [LotPostController::class, 'showRemoveForm'])->name('remove-lot-form');
+    Route::get('/remove-proposition-form/{propositionid}/{userid}', [PropositionController::class, 'showRemoveForm'])->name('remove-proposition-form');
+
+    Route::get('/edit-post-bid/{postid}', [LotPostController::class, 'edit'])->name('edit-post-bid');
+    Route::post('/edit_post-bid/{userid}/{postid}', [LotPostController::class, 'editPostBid'])->name('edit_post-bid');
+
+    Route::get('/edit-proposition/{propositionid}', [PropositionController::class, 'edit'])->name('edit-proposition');
+    Route::post('/edit_proposition/{userid}/{propositionid}', [PropositionController::class, 'editProposition'])->name('edit_proposition');
+});
+
+
+Route::middleware(['auth', 'verified', 'checkBan', 'checkRole:2,3'])->group(function () {
     // Post ask for equipment (soldier side)
     Route::get('/post-ask/form', [SoldierController::class, 'form_postAsk'])->name('form_post-ask');
     Route::post('/post-ask/create/{userid}', [SoldierController::class, 'create_postAsk'])->name('create_post-ask');
@@ -98,20 +111,11 @@ Route::middleware(['auth', 'verified', 'checkBan'])->group(function () {
     Route::get('/post-fundraising/form', [SoldierController::class, 'form_postFundraising'])->name('form_post-fundraising');
     Route::post('/post-fundraising/create/{userid}', [SoldierController::class, 'create_postFundraising'])->name('create_post-fundraising');
 
-    // Post for bids (user side)
-    Route::get('/post-bid/form', [UserController::class, 'form_postBid'])->name('form_post-bid');
-    Route::post('/post-bid/create/{userid}', [UserController::class, 'create_postBid'])->name('create_post-bid');
-    Route::post('/post-bid/createFree/{userid}', [UserController::class, 'create_postBidFree'])->name('create_post-bidFree');
-
-        
     Route::post('/lot-post/{postid}/place-bid', [LotPostController::class, 'bid'])->name('lot-post-bid');
-
-    Route::post('/ask-post/{postid}/{userid}/propose', [AskPostController::class, 'propose'])->name('ask-post-propose');
 
     Route::post('/place-bid/{postid}/{userid}', [LotPostController::class, 'placeBid'])->name('place-bid');
     Route::post('/get-free-lot/{postid}/{userid}', [LotPostController::class, 'getFreeLot'])->name('get-free-lot');
     Route::post('/accept-proposition/{propositionid}', [AskPostController::class, 'acceptProposition'])->name('accept-proposition');
-
 
     Route::get('/fundraising/edit/{postid}', [FundraisingPostController::class, 'edit'])->name('edit-fund');
     Route::post('/fundraising/remove/{postid}/{userid}', [FundraisingPostController::class, 'remove'])->name('remove-fund');
@@ -119,33 +123,27 @@ Route::middleware(['auth', 'verified', 'checkBan'])->group(function () {
     Route::get('/ask/edit/{postid}', [AskPostController::class, 'edit'])->name('edit-ask');
     Route::post('/ask/remove/{postid}/{userid}', [AskPostController::class, 'remove'])->name('remove-ask');
 
-    Route::get('/lot/edit/{postid}', [LotPostController::class, 'edit'])->name('edit-lot');
-    Route::post('/lot/remove/{postid}/{userid}', [LotPostController::class, 'remove'])->name('remove-lot');
-
-    Route::get('/proposition/edit/{propositionid}', [PropositionController::class, 'edit'])->name('edit-proposition');
-    Route::post('/proposition/remove/{propositionid}/{userid}', [PropositionController::class, 'remove'])->name('remove-proposition');
-
-
-    Route::get('/remove-lot-form/{postid}/{userid}', [LotPostController::class, 'showRemoveForm'])->name('remove-lot-form');
-    Route::get('/remove-ask-form/{postid}/{userid}', [AskPostController::class, 'showRemoveForm'])->name('remove-ask-form');
-    Route::get('/remove-proposition-form/{propositionid}/{userid}', [PropositionController::class, 'showRemoveForm'])->name('remove-proposition-form');
     Route::get('/remove-fundraising-form/{postid}/{userid}', [FundraisingPostController::class, 'showRemoveForm'])->name('remove-fundraising-form');
-    
-
-    Route::get('/admin/users/{user}/ban-form', [AdminController::class, 'showBanForm'])->name('admin.ban-form');
-    Route::post('/admin/users/{user}/process-ban-form', [AdminController::class, 'processBanForm'])->name('admin.process-ban-form');
-
-    Route::get('/admin/unban-user/{user}', [AdminController::class, 'unbanUser'])->name('admin.unban-user');
-
-    Route::get('/edit-post-bid/{postid}', [LotPostController::class, 'edit'])->name('edit-post-bid');
-    Route::post('/edit_post-bid/{userid}/{postid}', [LotPostController::class, 'editPostBid'])->name('edit_post-bid');
+    Route::get('/remove-ask-form/{postid}/{userid}', [AskPostController::class, 'showRemoveForm'])->name('remove-ask-form');
 
     Route::get('/edit-post-fundraising/{postid}', [FundraisingPostController::class, 'edit'])->name('edit-post-fundraising');
     Route::post('/edit_post-fundraising/{userid}/{postid}', [FundraisingPostController::class, 'editPostFundraising'])->name('edit_post-fundraising');
 
     Route::get('/edit-post-ask/{postid}', [AskPostController::class, 'edit'])->name('edit-post-ask');
     Route::post('/edit_post-ask/{userid}/{postid}', [AskPostController::class, 'editPostAsk'])->name('edit_post-ask');
+});
+Route::middleware(['auth', 'verified', 'checkBan', 'checkRole:3'])->group(function () {
+     // Verification (admin side)
+     Route::get('/verification-requests', [AdminController::class, 'viewVerificationRequests'])->name('verification-requests');
+     Route::get('/verification-request/{id}', [AdminController::class, 'viewVerification'])->name('view-verification');
+     Route::post('/verification-request/{id}/approve', [AdminController::class, 'approveVerification'])->name('approve-verification');
+     Route::post('/verification-request/{id}/disapprove', [AdminController::class, 'disapproveVerification'])->name('disapprove-verification');
+     Route::post('/verification-request/{id}/waiting', [AdminController::class, 'verificationToWaiting'])->name('verification-to-waiting');
+     Route::post('/verification-request/{id}/remove', [AdminController::class, 'removeVerification'])->name('remove-verification');
+     
+     Route::get('/payments', [AdminController::class, 'viewPayments'])->name('payments');
 
-    Route::get('/edit-proposition/{propositionid}', [PropositionController::class, 'edit'])->name('edit-proposition');
-    Route::post('/edit_proposition/{userid}/{propositionid}', [PropositionController::class, 'editProposition'])->name('edit_proposition');
+     Route::get('/admin/users/{user}/ban-form', [AdminController::class, 'showBanForm'])->name('admin.ban-form');
+     Route::post('/admin/users/{user}/process-ban-form', [AdminController::class, 'processBanForm'])->name('admin.process-ban-form');
+     Route::get('/admin/unban-user/{user}', [AdminController::class, 'unbanUser'])->name('admin.unban-user');
 });

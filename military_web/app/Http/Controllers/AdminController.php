@@ -7,6 +7,8 @@ use App\Models\RequestForRole;
 use App\Models\User;
 use App\Mail\DisapprovalEmail; 
 use App\Mail\ApprovalEmail;
+use App\Mail\BannedUser;
+use App\Mail\UnbannedUser;
 use Mail;
 use DB;
 use Illuminate\Support\Facades\Schema;
@@ -126,6 +128,8 @@ class AdminController extends Controller
 
         $user->save();
 
+        Mail::to($user->email)->send(new BannedUser($request->input('ban_expiration')));
+
         return redirect()->route('profile', ['userid' => $user->id])->with('success', 'Користувача заблоковано.');
     }
     public function unbanUser(User $user)
@@ -135,6 +139,8 @@ class AdminController extends Controller
         }
         $user->ban_expiration = null;
         $user->save();
+
+        Mail::to($user->email)->send(new UnbannedUser());
 
         return redirect()->back()->with('success', 'Користувача розблоковано.');
     }

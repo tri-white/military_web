@@ -84,7 +84,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="donationAmount">Введіть суму:</label>
-                            <input type="number" name="donationAmount" id="donationAmount" class="form-control" min="1">
+                            <input type="number" name="donationAmount" id="donationAmount" class="form-control" min="10">
                         </div>
                         <button type="submit" class="btn text-white mt-3" style="background-color: #B5C186;">Допомогти</button>
                     </form>

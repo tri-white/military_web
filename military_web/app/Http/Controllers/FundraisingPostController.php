@@ -102,7 +102,7 @@ class FundraisingPostController extends Controller
             $fundraisingPost->delete();
         }
         Mail::to($auth->email)->send(new FundraisingPayment($fundraisingPost));
-        return redirect()->back()->with('success', 'Операцію проведено успішно.');
+        return redirect()->back()->with('success', 'Інструкції по допомозі надіслано на пошту.');
     }
     public function search(Request $request)
     {

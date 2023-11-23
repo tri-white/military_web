@@ -11,7 +11,7 @@ class PostBid extends Model
     use HasFactory;
     protected $table = "post_bid";
     protected $casts = [
-        'expiration_datetime' => 'datetime', // This will cast the attribute to a Carbon instance
+        'expiration_datetime' => 'datetime',
     ];
     public function bids()
     {
