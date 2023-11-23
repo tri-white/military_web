@@ -67,8 +67,6 @@
                                     @endif
                                     @if(Auth::user()->role_id === 3)
                                     <li><a class="dropdown-item" href="{{ route('verification-requests') }}">Переглянути заяви на верифікацію</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('payments') }}">Переглянути історію платежів</a></li>
-                                   
                                     @endif
                                     <li><a class="dropdown-item" href="{{ route('logout') }}">Вихід з профілю</a></li>
                                 @else
